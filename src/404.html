@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Página no encontrada | Francisco David</title>
+    <link rel="stylesheet" href="css/404-style.css" />
+    <meta
+      name="description"
+      content="Oops! Esta página se perdió en el código... Parece que la página que buscas no existe o fue movida a otra dimensión del código."
+    />
+    <meta
+      name="keywords"
+      content="404, error, página no encontrada, Francisco David, portfolio, programación, desarrollo web"
+    />
+    <meta name="author" content="Francisco David" />
+    <meta name="theme-color" content="#1e293b" />
+    <meta
+      property="og:title"
+      content="404 - Página no encontrada | Francisco David"
+    />
+    <meta
+      property="og:description"
+      content="Oops! Esta página se perdió en el código... Parece que la página que buscas no existe o fue movida a otra dimensión del código."
+    />
+    <meta property="og:image" content="public/francisco_david-svg.svg" />
+    <meta property="og:url" content="https://itsfdavid.com/404" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Francisco David" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="404 - Página no encontrada | Francisco David"
+    />
+    <meta
+      name="twitter:description"
+      content="Oops! Esta página se perdió en el código... Parece que la página que buscas no existe o fue movida a otra dimensión del código."
+    />
+    <meta name="twitter:image" content="public/francisco_david-svg.svg" />
+    <link
+      rel="icon"
+      href="public/francisco_david-svg.svg"
+      type="image/svg+xml"
+    />
+  </head>
+  <body
+    class="bg-background text-white font-cascadia-code min-h-screen overflow-x-hidden"
+  >
+    <div class="matrix-bg" id="matrix-bg"></div>
+
+    <div
+      class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"
+    ></div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"
+      style="animation-delay: 1s"
+    ></div>
+
+    <div class="min-h-screen flex items-center justify-center px-4 relative">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="mb-8">
+          <div
+            class="bg-slate-800 rounded-lg shadow-lg p-6 border border-slate-700 text-left max-w-2xl mx-auto animate-float"
+          >
+            <div class="flex justify-between mb-4 items-center">
+              <div class="flex space-x-2">
+                <div
+                  class="w-3 h-3 bg-red-500 rounded-full hover:scale-110 transition-transform cursor-pointer"
+                ></div>
+                <div
+                  class="w-3 h-3 bg-yellow-500 rounded-full hover:scale-110 transition-transform cursor-pointer"
+                ></div>
+                <div
+                  class="w-3 h-3 bg-green-500 rounded-full hover:scale-110 transition-transform cursor-pointer"
+                ></div>
+              </div>
+              <div class="text-sm text-slate-500">error.ts</div>
+            </div>
+
+            <div class="space-y-2 text-slate-300 text-sm md:text-base">
+              <div class="flex flex-wrap">
+                <span class="text-rose-500">const</span>
+                <span class="text-blue-400 ml-2">error</span>:
+                <span class="text-red-400 ml-2">HttpException</span> =
+                <span class="text-yellow-400 ml-2">{</span>
+              </div>
+
+              <div class="ml-6 space-y-1">
+                <div class="flex flex-wrap">
+                  <span class="text-fuchsia-500">status</span>:
+                  <span class="text-orange-400 ml-2 animate-glitch">404</span>,
+                </div>
+                <div class="flex flex-wrap">
+                  <span class="text-fuchsia-500">message</span>:
+                  <span class="text-green-400 ml-2">'Página no encontrada'</span
+                  >,
+                </div>
+                <div class="flex flex-wrap">
+                  <span class="text-fuchsia-500">timestamp</span>:
+                  <span class="text-blue-300 ml-2" id="timestamp"
+                    >new Date()</span
+                  >,
+                </div>
+                <div class="flex flex-wrap">
+                  <span class="text-fuchsia-500">suggestion</span>:
+                  <span class="text-green-400 ml-2"
+                    >'Intenta volver al inicio'</span
+                  >
+                </div>
+              </div>
+
+              <div class="text-yellow-400">
+                }<span class="text-slate-400">;</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-2 border-t border-slate-700">
+              <p class="text-slate-500 text-xs md:text-sm">
+                <span class="text-red-400">✗</span> Error 404: Recurso no
+                encontrado en
+                <span class="text-blue-400">http://localhost:3000</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-6xl md:text-8xl font-bold mb-4">
+          <span class="text-primary animate-pulse">4</span>
+          <span class="text-white hover:animate-glitch cursor-pointer">0</span>
+          <span class="text-primary animate-pulse" style="animation-delay: 0.5s"
+            >4</span
+          >
+        </h1>
+
+        <div class="mb-8">
+          <p
+            class="text-xl md:text-2xl text-slate-400 mb-4 typing-animation"
+            id="typing-text"
+          >
+            Oops! Esta página se perdió en el código...
+          </p>
+          <p class="text-base md:text-lg text-slate-500">
+            Parece que la página que buscas no existe o fue movida a otra
+            dimensión del código.
+          </p>
+        </div>
+
+        <div
+          class="mb-8 text-primary text-xs md:text-sm font-mono hover:animate-pulse cursor-pointer select-none"
+          id="robot"
+        >
+          <pre class="inline-block">
+    ╭─────────╮
+    │  ◉   ◉  │
+    │    ─    │
+    ╰─┬─────┬─╯
+      │ 404 │
+    ╭─┴─────┴─╮
+    │ SISTEMA │
+    │ PERDIDO │
+    ╰─────────╯
+                </pre
+          >
+        </div>
+
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
+        >
+          <a
+            href="/"
+            class="group bg-primary font-bold text-lg py-3 px-6 rounded-xl text-black hover:bg-primary/90 transition-all duration-300 hover:scale-105 animate-pulse-glow"
+          >
+            <span class="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="group-hover:rotate-12 transition-transform"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9,22 9,12 15,12 15,22"></polyline>
+              </svg>
+              Volver al Inicio
+            </span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div
+            class="bg-slate-800/50 rounded-lg p-4 border border-slate-700 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+          >
+            <div class="text-2xl font-bold text-primary" id="counter1">0</div>
+            <div class="text-sm text-slate-400">Líneas de código buscando</div>
+          </div>
+          <div
+            class="bg-slate-800/50 rounded-lg p-4 border border-slate-700 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+          >
+            <div class="text-2xl font-bold text-primary" id="counter2">0</div>
+            <div class="text-sm text-slate-400">Bugs encontrados</div>
+          </div>
+          <div
+            class="bg-slate-800/50 rounded-lg p-4 border border-slate-700 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+          >
+            <div class="text-2xl font-bold text-primary" id="counter3">0</div>
+            <div class="text-sm text-slate-400">Cafés necesarios</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="particles-container"></div>
+    <script src="js/404.js" defer nonce="Y8rTz9uLkW3eHgPQ"></script>
+  </body>
+</html>

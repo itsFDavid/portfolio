@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+    <link
+      rel="icon"
+      href="public/francisco_david-svg.svg"
+      type="image/svg+xml"
+    />
+    <title>Francisco David | Desarrollador Full Stack y Portafolio Web</title>
+
+    <meta name="description" content="Portafolio de Francisco David, desarrollador full stack especializado en nestjs, NextJS, proyectos web modernos y sistemas inteligentes." />
+
+    <meta name="keywords" content="Francisco David, desarrollador web, portafolio, NestJS, nestjs, curso, react, python, proyectos NextJS, full stack, sistemas web, proyectos de programación" />
+
+    <meta name="author" content="Francisco David" />
+
+
+    <link rel="canonical" href="https://itsfdavid.com/" />
+
+
+    <meta property="og:title" content="Francisco David | Desarrollador Full Stack" />
+    <meta property="og:description" content="Explora los proyectos de Francisco David, un desarrollador full stack apasionado por soluciones modernas." />
+    <meta property="og:image" content="https://itsfdavid.com/public/francisco_david.webp" />
+    <meta property="og:url" content="https://itsfdavid.com/" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Francisco David | Desarrollador Web" />
+    <meta name="twitter:description" content="Mira mis proyectos en desarrollo web con NestJS y NextJS." />
+    <meta name="twitter:image" content="https://itsfdavid.com/public/francisco_david.webp" />
+
+    <link rel="stylesheet" href="css/output.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Francisco David",
+      "url": "https://itsfdavid.com/",
+      "image": "https://itsfdavid.com/public/francisco_david.webp",
+      "jobTitle": "Desarrollador Full Stack",
+      "sameAs": [
+        "https://github.com/itsFDavid",
+        "https://www.linkedin.com/in/francisco-david-dev/"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelancer"
+      }
+    }
+    </script>
+  </head>
+  <body class="bg-background text-white font-cascadia-code">
+    <header
+      class="text-white fixed top-0 w-full z-50 bg-background/70 backdrop-blur-sm"
+    >
+      <nav class="py-4 md:py-6">
+        <ul
+          class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 justify-between items-center container mx-auto px-4"
+        >
+          <div class="w-full md:w-auto flex justify-between items-center">
+            <a href="/" class="text-primary text-xl md:text-2xl font-bold">FD.</a>
+            <button class="md:hidden text-white" id="mobile-menu-toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" x2="21" y1="6" y2="6"></line>
+                <line x1="3" x2="21" y1="12" y2="12"></line>
+                <line x1="3" x2="21" y1="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="hidden md:flex space-x-4" id="desktop-menu">
+            <li>
+              <a href="#home" class="hover:text-primary transition-colors text-sm md:text-base">Inicio</a>
+            </li>
+            <li>
+              <a href="#about" class="hover:text-primary transition-colors text-sm md:text-base">Acerca</a>
+            </li>
+            <li>
+              <a href="#projects" class="hover:text-primary transition-colors text-sm md:text-base">Proyectos</a>
+            </li>
+            <li>
+              <a href="#skills" class="hover:text-primary transition-colors text-sm md:text-base">Habilidades</a>
+            </li>
+            <li>
+              <a href="#achievements" class="hover:text-primary transition-colors text-sm md:text-base">Logros</a>
+            </li>
+            <li>
+              <a href="#contact" class="hover:text-primary transition-colors text-sm md:text-base">Contacto</a>
+            </li>
+          </div>
+          <div class="w-full md:hidden mt-4 hidden" id="mobile-menu">
+            <div class="flex flex-col space-y-3 text-left bg-background/90 rounded-lg p-4">
+              <a href="#home" class="hover:text-primary transition-colors py-2">Inicio</a>
+              <a href="#about" class="hover:text-primary transition-colors py-2">Acerca</a>
+              <a href="#projects" class="hover:text-primary transition-colors py-2">Proyectos</a>
+              <a href="#skills" class="hover:text-primary transition-colors py-2">Habilidades</a>
+              <a href="#achievements" class="hover:text-primary transition-colors py-2">Logros</a>
+              <a href="#contact" class="hover:text-primary transition-colors py-2">Contacto</a>
+            </div>
+          </div>
+        </ul>
+      </nav>
+    </header>
+
+    <ul class="list-none container mx-auto px-4">
+      <section
+        id="home"
+        class="text-center py-20 md:py-20 flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0 min-h-screen pt-24 md:pt-20"
+      >
+        <div
+          class="absolute top-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute top-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-primary/5 rounded-full blur-3xl"
+        ></div>
+        
+        <div class="flex flex-col items-center lg:items-start space-y-4 w-full lg:w-1/2 order-2 lg:order-1">
+          <p class="text-sm text-primary">Hola! yo soy</p>
+          <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 text-center lg:text-left">
+            Francisco
+            <span
+              class="text-primary relative inline-block after:content-[''] after:block after:w-32 md:after:w-45 after:h-1 after:bg-primary/30 after:mt-2"
+              >David</span
+            >
+          </h1>
+
+          <p class="text-base md:text-lg lg:text-2xl mb-6 text-slate-500 text-center lg:text-justify">
+            Full Stack Developer & Estudiante de Ingeniería en Sistemas
+          </p>
+
+          <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-5 justify-center items-center w-full">
+            <div class="flex items-center justify-center space-y-0 space-x-4 w-9/12 md:w-auto">
+              <div class="hover:scale-105 flex items-center justify-center w-full sm:w-auto">
+                <a
+                  href="#contact"
+                  class="bg-primary font-bold text-base md:text-lg py-2 px-6 rounded-xl text-black hover:bg-primary/90 ease-in-out duration-300 w-full sm:w-auto text-center"
+                >
+                  Contactame
+                </a>
+              </div>
+              <div class="hover:scale-105 flex items-center justify-center w-full sm:w-auto">
+                <a
+                  href="#projects"
+                  class="bg-black font-bold text-base md:text-lg py-2 px-6 rounded-xl text-white border-1 border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300 w-full sm:w-auto text-center sm:hover:bg-primary/90"
+                  >Ver Proyectos</a
+                >
+              </div>
+            </div>
+            <div class="flex items-center gap-4 mt-4 md:mt-0">
+              <a
+                href="https://github.com/itsFdavid"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 hover:text-primary transition-colors p-2 hover:rotate-12"
+                aria-label="GitHub"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-github"
+                >
+                  <path
+                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                  ></path>
+                  <path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a
+              ><a
+                href="https://www.linkedin.com/in/francisco-david-dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 hover:text-primary transition-colors p-2 hover:rotate-12"
+                aria-label="LinkedIn"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-linkedin"
+                >
+                  <path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  ></path>
+                  <rect width="4" height="12" x="2" y="9"></rect>
+                  <circle cx="4" cy="4" r="2"></circle></svg></a
+              ><a
+                href="mailto:fdavid04@icloud.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 hover:text-primary transition-colors p-2 hover:rotate-12"
+                aria-label="Email"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-mail"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code section -->
+        <div
+          class="w-full lg:w-5/12 flex justify-center border-1 border-slate-100 rounded-lg text-slate-400 relative order-2 lg:order-2"
+        >
+          <div
+            class="bg-slate-800 rounded-lg shadow-lg p-3 md:p-6 w-full border border-slate-700 text-start overflow-x-auto"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-primary/5 rounded-2xl animate-float-up-down -z-20"
+            ></div>
+            <div class="flex justify-between mb-4 items-center">
+              <div class="flex space-x-2">
+                <div
+                  class="w-2 h-2 md:w-3 md:h-3 bg-red-500 rounded-full hover:scale-110"
+                ></div>
+                <div
+                  class="w-2 h-2 md:w-3 md:h-3 bg-yellow-500 rounded-full hover:scale-110"
+                ></div>
+                <div
+                  class="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full hover:scale-110"
+                ></div>
+              </div>
+              <div class="text-xs md:text-sm text-slate-500">dev.ts</div>
+            </div>
+
+            <h1 class="text-sm md:text-xl font-bold text-slate-300 mb-4 text-start">
+              <span class="text-rose-500">const</span>
+              <span class="text-blue-400">developer</span>:
+              <span class="text-red-400">FullStack</span> =
+              <span class="text-yellow-400">{</span>
+            </h1>
+
+            <div class="space-y-2 md:space-y-4 ml-3 md:ml-6 text-slate-300 text-xs md:text-base">
+              <div class="flex flex-wrap">
+                <span class="text-fuchsia-500">nombre</span>:
+                <p class="text-green-400 ml-2">'Francisco David'</p>
+                ,
+              </div>
+
+              <div class="flex flex-wrap">
+                <div class="flex">
+                  <span class="text-fuchsia-500">skills</span>:
+                  <p class="text-yellow-400 ml-2">[</p>
+                </div>
+                <ul class="text-slate-300 list-none flex flex-wrap ml-4-custom">
+                  <li class="text-green-400">'NestJs'</li>
+                  ,
+                  <li class="text-green-400">'Node.js'</li>
+                  ,
+                  <li class="text-green-400">'React'</li>
+                  ,
+                  <li class="text-green-400">'Python'</li>
+                </ul>
+                <span class="text-yellow-400">]</span>,
+              </div>
+
+              <div class="flex flex-wrap">
+                <div class="flex">
+                  <span class="text-fuchsia-500">enfocado</span>:
+                  <span class="text-yellow-400 ml-2">[</span>
+                </div>
+                <ul class="text-slate-300 list-none flex flex-wrap">
+                  <li class="text-green-400">'FullStack'</li>
+                  ,
+                  <li class="text-green-400">'Backend'</li>
+                </ul>
+                <span class="text-yellow-400">]</span>,
+              </div>
+
+              <div class="flex flex-wrap">
+                <span class="text-fuchsia-500">aprendiendo</span>:
+                <p class="text-green-400 ml-2">'Siempre'</p>
+              </div>
+            </div>
+
+            <h1 class="text-sm md:text-xl font-bold text-yellow-400 mt-4">
+              }<span class="text-slate-400">;</span>
+            </h1>
+
+            <div class="mt-4 pt-2 border-t border-slate-700">
+              <p class="text-slate-500 text-xs md:text-sm break-all">
+                <span class="text-green-400">$</span> servidor corriendo en
+                <span class="text-blue-400">http://localhost:3000</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="about"
+        class="min-h-screen flex items-center justify-start px-4 py-16"
+      >
+        <div class="w-full mx-auto">
+          <h2
+            class="text-2xl md:text-3xl font-bold mb-6 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-primary after:mt-2"
+          >
+            Acerca de mí
+          </h2>
+          <div class="flex flex-col lg:flex-row w-full justify-between items-start space-y-8 lg:space-y-0 lg:space-x-8">
+            <div class="space-y-6 w-full lg:w-8/12">
+              <div>
+                <h3 class="text-lg md:text-xl mb-2 flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-file-text w-4 h-4 md:w-5 md:h-5 text-primary"
+                  >
+                    <path
+                      d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
+                    ></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M10 9H8"></path>
+                    <path d="M16 13H8"></path>
+                    <path d="M16 17H8"></path>
+                  </svg>
+                  Bio
+                </h3>
+                <p class="text-base md:text-lg text-slate-500 mb-6 text-justify">
+                  Soy un apasionado del desarrollo backend con NestJs,
+                  actualmente me encuentro aprendiendo React, Python para
+                  análisis de datos. Me gusta enfrentarme a nuevos retos y
+                  aprender constantemente.
+                </p>
+              </div>
+
+              <div class="flex gap-6">
+                <div
+                  class="rounded-lg w-full border text-slate-400 shadow-sm h-full border-primary/10 bg-background/50 hover:-translate-y-3 transition-transform duration-300"
+                >
+                  <div class="p-4 md:p-6 pt-4 md:pt-6">
+                    <h3 class="text-base md:text-lg text-white flex items-center gap-2 mb-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-graduation-cap w-4 h-4 md:w-5 md:h-5 text-primary"
+                      >
+                        <path
+                          d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"
+                        ></path>
+                        <path d="M22 10v6"></path>
+                        <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
+                      </svg>
+                      Educación
+                    </h3>
+                    <div class="space-y-4">
+                      <div class="space-y-2">
+                        <p class="text-white text-sm md:text-md">Tecnico en Computación</p>
+                        <p class="text-xs md:text-sm">
+                          CECyTEM (Colegio de Estudios Cientificos y
+                          Tecnologicos del Estado de México)
+                        </p>
+                        <p class="text-xs md:text-sm">2019 - 2022</p>
+                      </div>
+                      <div class="space-y-2">
+                        <p class="text-white text-sm md:text-md">
+                          Ingeniería en Sistemas Computacionales
+                        </p>
+                        <p class="text-xs md:text-sm">
+                          TESJI (Tecnologico de Estudios Superiores de
+                          Jilotepec)
+                        </p>
+                        <p class="text-xs md:text-sm">2022 - Presente</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col items-center lg:items-start w-full lg:w-3/12">
+              <div class="mb-6">
+                <img
+                  src="public/francisco_david.webp"
+                  alt="Francisco David"
+                  class="w-32 h-32 md:w-40 md:h-40 lg:w-50 lg:h-50 aspect-square rounded-full border-4 border-primary/20 shadow-lg object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div class="text-center lg:text-left mb-5">
+                <h3 class="text-xl md:text-2xl mb-1">Francisco David</h3>
+                <p class="text-slate-500 text-sm">Full Stack Developer</p>
+                <p class="text-slate-500 text-sm">
+                  Estudiante de Ingeniera en Sistemas
+                </p>
+              </div>
+              <div
+                class="flex flex-wrap justify-center lg:justify-start items-center gap-2 mb-4"
+              >
+                <div
+                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-white bg-primary/20 border-primary/30"
+                >
+                  React
+                </div>
+                <div
+                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-white bg-primary/20 border-primary/30"
+                >
+                  NestJs
+                </div>
+                <div
+                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-white bg-primary/20 border-primary/30"
+                >
+                  Node.js
+                </div>
+                <div
+                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-white bg-primary/20 border-primary/30"
+                >
+                  Python
+                </div>
+              </div>
+              <div>
+                <a
+                  href="#about"
+                  download="Francisco_David_CV.pdf"
+                  class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-black hover:bg-primary/90 h-10 px-4 py-2 gap-2 hover:scale-105 ease-in-out duration-1000 w-full lg:w-auto"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-download w-4 h-4"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                  </svg>
+                  Download Resume
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="projects"
+        class="min-h-screen flex items-center justify-start px-4 py-16"
+      >
+        <div class="w-full mx-auto">
+          <h2
+            class="text-2xl md:text-3xl font-bold mb-6 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-primary after:mt-2"
+          >
+            Proyectos
+          </h2>
+          <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
+            Aquí puedes encontrar algunos de mis proyectos más destacados. Cada
+            uno refleja mi pasión por el desarrollo y mi compromiso con la
+            calidad.
+          </p>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full"
+          >
+            <!-- Project gestion escolar in laravel -->
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="h-48 bg-primary/40 relative overflow-hidden">
+                <div class="overflow-hidden">
+                  <span
+                    class="w-full h-full lazy-load-image-background lazy-load-image-loaded"
+                    ><img
+                      src="public/gestion_escolar.webp"
+                      alt="Imagen del proyecto Gestion Escolar"
+                      class="transition-all duration-500 scale-100 blur-0 w-full h-48 object-cover"
+                  /></span>
+                </div>
+                <div
+                  class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+                >
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/School-Rating-Management/rating-management-laravel"
+                      class="bg-background text-white p-2 rounded-full hover:bg-slate-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub repository for Gestion Escolar"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-github"
+                      >
+                        <path
+                          d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                        ></path>
+                        <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 md:p-6 space-y-4">
+                <h3 class="text-lg md:text-xl font-bold text-white">
+                  Gestion Escolar con Laravel
+                </h3>
+                <p class="text-slate-400 text-sm text-justify">
+                  Un sistema de gestión escolar desarrollado en Laravel que
+                  permite administrar estudiantes, cursos y calificaciones de
+                  manera eficiente.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Laravel</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >MySQL</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Blade Php</span
+                  >
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Tailwind CSS</span
+                  >
+                </div>
+                <div class="flex gap-3 pt-2">
+                  <a
+                    href="https://github.com/School-Rating-Management/rating-management-laravel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub repository for Gestion Escolar"
+                    class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-github"
+                    >
+                      <path
+                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                      ></path>
+                      <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                    </svg>
+                    <span> GitHub </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project tiendas don pepe -->
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="h-48 bg-primary/40 relative overflow-hidden">
+                <div class="overflow-hidden">
+                  <span
+                    class="w-full h-full lazy-load-image-background lazy-load-image-loaded"
+                    ><img
+                      src="public/tiendas-don-pepe.webp"
+                      alt="Imagen del proyecto Tiendas Don Pepe"
+                      class="transition-all duration-500 scale-100 blur-0 w-full h-48 object-cover"
+                  /></span>
+                </div>
+                <div
+                  class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+                >
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/itsFDavid/Projects/tree/main/API-Nest-Tienda/tienda-don-pepe"
+                      class="bg-background text-white p-2 rounded-full hover:bg-slate-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub repository for"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-github"
+                      >
+                        <path
+                          d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                        ></path>
+                        <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 md:p-6 space-y-4">
+                <h3 class="text-lg md:text-xl font-bold text-white">
+                  E-commerce Tiendas Don Pepe
+                </h3>
+                <p class="text-slate-400 text-sm text-justify">
+                  Un sistema de comercio electrónico desarrollado con Next y
+                  NestJs, que permite a los usuarios comprar productos en línea
+                  de manera fácil y rápida ademas de descargar sus facturas en
+                  PDF.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >NextJs</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >NestJs</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >MySQL</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >PdfMake</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >TypeScript</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Shadcn</span
+                  >
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Tailwind CSS</span
+                  >
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                  <!-- API Repo -->
+                  <a
+                    href="https://github.com/itsFDavid/Projects/tree/main/API-Nest-Tienda/tienda-don-pepe"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label=""
+                    class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-github"
+                    >
+                      <path
+                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                      ></path>
+                      <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                    </svg>
+                    <span> GitHub API </span>
+                  </a>
+                  <!-- Front Repo -->
+                  <a
+                    href="#projects"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Repository for Tiendas Don Pepe Frontend"
+                    class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-github"
+                    >
+                      <path
+                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                      ></path>
+                      <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                    </svg>
+                    <span> GitHub Frontend</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project memory game -->
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="h-48 bg-primary/40 relative overflow-hidden">
+                <div class="overflow-hidden">
+                  <span
+                    class="w-full h-full lazy-load-image-background lazy-load-image-loaded"
+                    ><img
+                      src="public/memory_game.webp"
+                      alt="Imagen del proyecto Memory Game"
+                      class="transition-all duration-500 scale-100 blur-0 w-full h-48 object-cover"
+                  /></span>
+                </div>
+                <div
+                  class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+                >
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://illustrious-alfajores-e89d2e.netlify.app/"
+                      class="bg-background text-white p-2 rounded-full hover:bg-slate-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Demo of Memory Game"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-external-link"
+                      >
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14 21 3"></path>
+                        <path
+                          d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                        ></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 md:p-6 space-y-4">
+                <h3 class="text-lg md:text-xl font-bold text-white">
+                  Memory Game
+                </h3>
+                <p class="text-slate-400 text-sm text-justify">
+                  Un juego de memoria interactivo desarrollado con React. 
+                  El objetivo es encontrar pares de cartas iguales
+                  antes que tu contrincante.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >React</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Tailwind CSS</span
+                  >
+                </div>
+                <div class="flex gap-3 pt-2">
+                  <a
+                    href="https://illustrious-alfajores-e89d2e.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Demo of Memory Game"
+                    class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-external-link"
+                    >
+                      <path d="M15 3h6v6"></path>
+                      <path d="M10 14 21 3"></path>
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      ></path>
+                    </svg>
+                    <span> Demo </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- More projects -->
+            <!-- Project heart fail detect -->
+            <div
+              class="hidden extra-project bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="h-48 bg-primary/40 relative overflow-hidden">
+                <div class="overflow-hidden">
+                  <span
+                    class="w-full h-full lazy-load-image-background lazy-load-image-loaded"
+                    ><img
+                      src="public/heart_fail_detector.webp"
+                      alt="Imagen del proyecto Heart Fail Detect"
+                      class="transition-all duration-500 scale-100 blur-0 w-full h-48 object-cover"
+		      loading="lazy"
+                  /></span>
+                </div>
+                <div
+                  class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+                >
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://github.com/itsFDavid/Simulacion/tree/main/Practices/Train_Heart_Failure"
+                      class="bg-background text-white p-2 rounded-full hover:bg-slate-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub repository for heart fail detect"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-github"
+                      >
+                        <path
+                          d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                        ></path>
+                        <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 md:p-6 space-y-4">
+                <h3 class="text-lg md:text-xl font-bold text-white">
+                  Detectar Fallos Cardíacos
+                </h3>
+                <p class="text-slate-400 text-sm text-justify">
+                  Un proyecto de análisis de datos que utiliza Python y Machine
+                  Learning para detectar fallos cardíacos a partir de un
+                  conjunto de datos de salud.
+
+                  <br />
+                  <br />
+                  Utiliza un modelo de regresión logística entrenado con
+                  datos de pacientes con fallos cardíacos.
+                  <br />
+                  <br />
+                  Contiene:
+                  <br />
+                  Precicison de 88.12%
+                  <br />
+                  F1 Score de 89.60%
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Python</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Flask</span
+                  >
+                </div>
+                <div class="flex gap-3 pt-2">
+                  <a
+                    href="https://github.com/itsFDavid/Simulacion/tree/main/Practices/Train_Heart_Failure"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label=""
+                    class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-github"
+                    >
+                      <path
+                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                      ></path>
+                      <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                    </svg>
+                    <span> GitHub </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project turing machine -->
+            <div
+              class="hidden extra-project bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="h-48 bg-primary/40 relative overflow-hidden">
+                <div class="overflow-hidden">
+                  <span
+                    class="w-full h-full lazy-load-image-background lazy-load-image-loaded"
+                    ><img
+                      src="public/turing_machine.webp"
+                      alt="Imagen del proyecto Turing Machine"
+                      class="transition-all duration-500 scale-100 blur-0 w-full h-48 object-cover"
+		      loading="lazy"
+                  /></span>
+                </div>
+                <div
+                  class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+                >
+                  <div class="flex space-x-4">
+                    <a
+                      href="https://projects-m69u.onrender.com/"
+                      class="bg-background text-white p-2 rounded-full hover:bg-slate-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Demo of Turing Machine"
+                      >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-external-link"
+                      >
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14 21 3"></path>
+                        <path
+                          d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                        ></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 md:p-6 space-y-4">
+                <h3 class="text-lg md:text-xl font-bold text-white">
+                  Simulador de Máquina de Turing
+                </h3>
+                <p class="text-slate-400 text-sm text-justify">
+                  Un simulador de máquina de Turing que permite a los usuarios
+                  experimentar con diferentes configuraciones y ver cómo la
+                  máquina procesa cadenas de entrada.
+                  <br />
+                  <br />
+                  Utiliza un modelo de máquina de Turing para simular el
+                  procesamiento de cadenas de caracteres con prodcuto de dos numeros.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >HTML</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >CSS</span
+                  >
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >JavaScript</span
+                  >
+                </div>
+                <div class="flex gap-3 pt-2">
+                  <a
+                    href="https://projects-m69u.onrender.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Demo of Turing Machine"
+                    class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
+                    >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-external-link"
+                    >
+                      <path d="M15 3h6v6"></path>
+                      <path d="M10 14 21 3"></path>
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      ></path>
+                    </svg>
+                    <span> Demo </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- Button more projects -->
+          <div class="flex justify-center mt-12">
+            <button
+              class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-slate-800 bg-background hover:bg-primary hover:text-black h-10 px-4 py-2 group cursor-pointer hover:scale-105 ease-in-out duration-300"
+              id="toggle-projects-btn"
+            >
+              <span id="toggle-projects-text">Ver más proyectos</span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-code ml-2 group-hover:translate-x-1 transition-transform"
+              >
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="skills"
+        class="min-h-screen flex items-center justify-start px-4 py-16"
+      >
+        <div class="w-full mx-auto">
+          <h2
+            class="text-2xl md:text-3xl font-bold mb-6 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-primary after:mt-2"
+          >
+            Habilidades
+          </h2>
+          <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
+            Aquí están algunas de las tecnologías y herramientas con las que
+            trabajo regularmente.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="p-4 md:p-6 space-y-4">
+                <h3
+                  class="text-base md:text-lg font-bold text-white flex items-center gap-2 mb-3"
+                >
+                  <div
+                    class="p-2 bg-primary/10 text-primary rounded-md hover:rotate-12 hover:scale-105 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-panels-top-left h-4 w-4 md:h-5 md:w-5"
+                    >
+                      <polyline points="4 17 10 11 4 5"></polyline>
+                      <line x1="12" x2="20" y1="19" y2="19"></line>
+                    </svg>
+                  </div>
+                  Lenguajes de Programacion
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >JavaScript</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >TypeScript</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Python</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >HTML & CSS
+                  </span>
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >SQL</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >PHP</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="p-4 md:p-6 space-y-4">
+                <h3
+                  class="text-base md:text-lg font-bold text-white flex items-center gap-2 mb-3"
+                >
+                  <div
+                    class="p-2 bg-primary/10 text-primary rounded-md hover:rotate-12 hover:scale-105 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-panels-top-left h-4 w-4 md:h-5 md:w-5"
+                    >
+                      <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                      <path d="M3 9h18"></path>
+                      <path d="M9 21V9"></path>
+                    </svg>
+                  </div>
+                  Desarrollo Frontend
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >React</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Tailwind CSS</span
+                  >
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Bootstrap</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Blade php</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="p-4 md:p-6 space-y-4">
+                <h3
+                  class="text-base md:text-lg font-bold text-white flex items-center gap-2 mb-3"
+                >
+                  <div
+                    class="p-2 bg-primary/10 text-primary rounded-md hover:rotate-12 hover:scale-105 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-code h-4 w-4 md:h-5 md:w-5"
+                    >
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                  </div>
+                  Desarrollo Backend
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Node.js</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Express.js</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >NestJs</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Microservicios NestJs</span
+                  >
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >REST APIs</span
+                  >
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Laravel</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="p-4 md:p-6 space-y-4">
+                <h3
+                  class="text-base md:text-lg font-bold text-white flex items-center gap-2 mb-3"
+                >
+                  <div
+                    class="p-2 bg-primary/10 text-primary rounded-md hover:rotate-12 hover:scale-105 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-database h-4 w-4 md:h-5 md:w-5"
+                    >
+                      <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                      <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                      <path d="M3 12A9 3 0 0 0 21 12"></path>
+                    </svg>
+                  </div>
+                  Bases de Datos
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >MySQL</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >PostgreSQL</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Prisma ORM</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Type ORM</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >MongoDB</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="p-4 md:p-6 space-y-4">
+                <h3
+                  class="text-base md:text-lg font-bold text-white flex items-center gap-2 mb-3"
+                >
+                  <div
+                    class="p-2 bg-primary/10 text-primary rounded-md hover:rotate-12 hover:scale-105 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-cpu h-4 w-4 md:h-5 md:w-5"
+                    >
+                      <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+                      <rect width="6" height="6" x="9" y="9" rx="1"></rect>
+                      <path d="M15 2v2"></path>
+                      <path d="M15 20v2"></path>
+                      <path d="M2 15h2"></path>
+                      <path d="M2 9h2"></path>
+                      <path d="M20 15h2"></path>
+                      <path d="M20 9h2"></path>
+                      <path d="M9 2v2"></path>
+                      <path d="M9 20v2"></path>
+                    </svg>
+                  </div>
+                  Herramientas y Tecnologias
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                  >
+                    Git
+                  </span>
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                  >
+                    VS Code
+                  </span>
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                  >
+                    Docker
+                  </span>
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                  >
+                    Postman
+                  </span>
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                  >
+                    Swagger
+                  </span>
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                  >
+                    Figma
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- soft skills y hard skills -->
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <div class="p-4 md:p-6 space-y-4">
+                <h3
+                  class="text-base md:text-lg font-bold text-white flex items-center gap-2 mb-3"
+                >
+                  <div
+                    class="p-2 bg-primary/10 text-primary rounded-md hover:rotate-12 hover:scale-105 transition-transform duration-300"
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="24" 
+                      height="24" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      stroke-width="2"
+                      stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      class="lucide lucide-key-icon lucide-key w-4 h-4 md:w-5 md:h-5">
+                        <path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/>
+                        <path d="m21 2-9.6 9.6"/>
+                        <circle cx="7.5" cy="15.5" r="5.5"/>
+                    </svg>
+                  </div>
+                  Soft Skills y Hard Skills
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Ingles B2</span
+                  >
+                  <span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Trabajo en equipo</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Comunicación</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Resolución de problemas</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Adaptabilidad</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Creatividad</span
+                  ><span
+                    class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                    >Liderazgo</span
+                  >
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="achievements"
+        class="min-h-screen flex items-center justify-start px-4 py-16"
+      >
+        <div class="w-full mx-auto">
+          <h2
+            class="text-2xl md:text-3xl font-bold mb-6 relative inline-block after:content-[''] after:block after:w-29 after:h-1 after:bg-primary after:mt-2"
+          >
+            Logros y Reconocimientos
+          </h2>
+          <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
+            Algunas certificaciones, cursos y logros que he obtenido a lo largo
+            de mi carrera.
+          </p>
+
+          <!-- CARRUSEL -->
+          <div class="flex flex-col sm:flex-row justify-between mb-6 space-y-2 sm:space-y-0 sm:space-x-2">
+            <div class="flex items-center text-slate-600 text-sm justify-center sm:justify-start">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-grip h-4 w-4 mr-2"
+              >
+                <circle cx="12" cy="5" r="1"></circle>
+                <circle cx="19" cy="5" r="1"></circle>
+                <circle cx="5" cy="5" r="1"></circle>
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="19" cy="12" r="1"></circle>
+                <circle cx="5" cy="12" r="1"></circle>
+                <circle cx="12" cy="19" r="1"></circle>
+                <circle cx="19" cy="19" r="1"></circle>
+                <circle cx="5" cy="19" r="1"></circle>
+              </svg>
+              <span class="text-sm hidden md:inline">Desliza para ver mas</span>
+              <span class="text-sm md:hidden">Desliza</span>
+            </div>
+            <div class="flex space-x-2 justify-center sm:justify-end">
+              <button
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-slate-800 bg-background hover:bg-background hover:text-accent-foreground h-10 w-10 rounded-full"
+                aria-label="Scroll left"
+                id="scroll-left"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-left h-4 w-4"
+                >
+                  <path d="m15 18-6-6 6-6"></path>
+                </svg></button
+              ><button
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-slate-800 bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full"
+                aria-label="Scroll right"
+                id="scroll-right"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chevron-right h-4 w-4"
+                >
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            id="achievements-carousel"
+            class="flex overflow-x-auto pb-6 space-x-6 snap-x scrollbar-hidden cursor-grab scroll-smooth"
+          >
+            
+            <!-- Certificacion Tecnico en computacion Cecytem-->
+            <div
+              class="min-w-[280px] max-w-[280px] md:min-w-[300px] md:max-w-[300px] bg-card p-4 md:p-6 rounded-lg shadow-sm border border-slate-800 snap-center select-none mt-2 hover:-translate-y-2 transition-transform duration-300 relative group"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="p-2 rounded-full mr-3 bg-yellow-100/80 text-yellow-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-trophy h-4 w-4 md:h-5 md:w-5"
+                  >
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path
+                      d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"
+                    ></path>
+                    <path
+                      d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"
+                    ></path>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-slate-400">2022</p>
+                  <h3 class="text-white text-sm md:text-base">Titulo de Tecnico en computacion</h3>
+                </div>
+              </div>
+              <p class="text-sm text-slate-400 mb-4 text-justify">
+                Obtuve el título de Técnico en Computación por parte del
+                Colegio de Estudios Científicos y Tecnológicos del Estado de
+                México (Cecytem).
+              </p>
+              <span
+                class="text-xs px-2 py-1 rounded-full bg-yellow-100/80 text-yellow-800"
+                >Academico</span
+              >
+            </div>
+
+            <!-- Certificacion Tecnico en nube -->
+            <div
+              class="min-w-[280px] max-w-[280px] md:min-w-[300px] md:max-w-[300px] bg-card p-4 md:p-6 rounded-lg shadow-sm border border-slate-800 snap-center select-none mt-2 hover:-translate-y-2 transition-transform duration-300 relative group"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="p-2 rounded-full mr-3 bg-yellow-100/80 text-yellow-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-trophy h-4 w-4 md:h-5 md:w-5"
+                  >
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path
+                      d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"
+                    ></path>
+                    <path
+                      d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"
+                    ></path>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-slate-400">2025</p>
+                  <h3 class="text-white text-sm md:text-base">Técnico en cómputo en la nube</h3>
+                </div>
+              </div>
+              <p class="text-sm font-normal text-slate-400 mb-4 text-justify">
+                Obtuve el título de Técnico en Cómputo en la Nube por parte del
+                proyecto Capacitación para el Empleo del Gobierno de México y Fundación
+                Carlos Slim.
+                <br><br>
+                Este curso me proporcionó una sólida base en tecnologías de
+                nube, incluyendo servicios de almacenamiento, bases de datos y
+                computación en la nube.
+              </p>
+              <span
+                class="text-xs px-2 py-1 rounded-full bg-yellow-100/80 text-yellow-800"
+                >Academico</span
+              >
+            </div>
+
+            <!-- Curso Nest -->
+            <div
+              class="min-w-[280px] max-w-[280px] md:min-w-[300px] md:max-w-[300px] bg-card p-4 md:p-6 rounded-lg shadow-sm border border-slate-800 snap-center select-none mt-2 hover:-translate-y-2 transition-transform duration-300 relative group"
+            >
+              <div class="flex items-center mb-4">
+                <div class="p-2 rounded-full mr-3 bg-blue-100/80 text-blue-600">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-star h-4 w-4 md:h-5 md:w-5"
+                  >
+                    <path
+                      d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-normal text-slate-400">2024</p>
+                  <h3 class="text-sm md:text-base font-semibold text-white">Curso NestJs</h3>
+                </div>
+              </div>
+              <p class="text-sm text-slate-400 mb-4 text-justify">
+                Completé un curso de NestJs, donde aprendí a desarrollar
+                aplicaciones backend escalables y eficientes utilizando este
+                framework.
+                <br /><br />
+                El curso fui impartido por Fernando Herrera, un reconocido
+                instructor en el ámbito del desarrollo web.
+              </p>
+              <span
+                class="text-xs px-2 py-1 rounded-full bg-blue-100/80 text-blue-800"
+                >Educacion</span
+              >
+            </div>
+            <!-- Curso Nest Microservicios -->
+            <div
+              class="min-w-[280px] max-w-[280px] md:min-w-[300px] md:max-w-[300px] bg-card p-4 md:p-6 rounded-lg shadow-sm border border-slate-800 snap-center select-none mt-2 hover:-translate-y-2 transition-transform duration-300 relative group"
+            >
+              <div class="flex items-center mb-4">
+                <div class="p-2 rounded-full mr-3 bg-blue-100/80 text-blue-600">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-star h-4 w-4 md:h-5 md:w-5"
+                  >
+                    <path
+                      d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-normal text-slate-400">2024</p>
+                  <h3 class="text-sm md:text-base font-semibold text-white">Curso Microservicios NestJs</h3>
+                </div>
+              </div>
+              <p class="text-sm text-slate-400 mb-4 text-justify">
+                Completé un curso de Microservicios con NestJs, donde aprendí a
+                diseñar y desarrollar aplicaciones distribuidas utilizando el
+                patrón de microservicios.
+                <br /><br />
+                El curso fue impartido por Fernando Herrera, un reconocido
+                instructor en el ámbito del desarrollo web.
+              </p>
+              <span
+                class="text-xs px-2 py-1 rounded-full bg-blue-100/80 text-blue-800"
+                >Educacion</span
+              >
+            </div>
+
+             <!-- Logros universitarios-->
+            <div
+              class="min-w-[280px] max-w-[280px] md:min-w-[300px] md:max-w-[300px] bg-card p-4 md:p-6 rounded-lg shadow-sm border border-slate-800 snap-center select-none mt-2 hover:-translate-y-2 transition-transform duration-300 relative group"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="p-2 rounded-full mr-3 bg-green-100/80 text-green-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-award h-4 w-4 md:h-5 md:w-5"
+                  >
+                    <path
+                      d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"
+                    ></path>
+                    <circle cx="12" cy="8" r="6"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-normal text-slate-400">2024</p>
+                  <h3 class="text-sm md:text-base font-semibold text-white">
+                    Participacion en Coloquio
+                  </h3>
+                </div>
+              </div>
+              <p class="text-sm text-slate-400 mb-4 text-justify">
+                Participé en un coloquio universitario donde presenté un
+                proyecto de compuertas logicas, electronica digital.
+                <br /><br />
+                Este evento me permitió compartir mis conocimientos y aprender
+                de otros profesionales del campo.
+              </p>
+              <span
+                class="text-xs px-2 py-1 rounded-full bg-green-100/80 text-green-800"
+              >
+                Universitario
+              </span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="contact"
+        class="min-h-screen flex items-center justify-start px-4 py-16"
+      >
+        <div class="w-full mx-auto">
+          <h2
+            class="text-2xl md:text-3xl font-bold mb-6 relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-primary after:mt-2"
+          >
+            Contacto
+          </h2>
+          <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
+            Si deseas ponerte en contacto conmigo, puedes enviarme un correo
+            electrónico o conectarte conmigo a través de las redes sociales.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-mail w-4 h-4 md:w-5 md:h-5 mt-1 text-primary"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+                <div>
+                  <h4 class="font-medium text-white">Email</h4>
+                  <p class="text-sm text-slate-400">
+                    <a href="mailto:fdavid04@icloud.com">fdavid04@icloud.com</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-map-pin w-4 h-4 md:w-5 md:h-5 mt-1 text-primary"
+                >
+                  <path
+                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                  ></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <div>
+                  <h4 class="font-medium text-white">Ubicacion</h4>
+                  <p class="text-sm text-slate-400">México, Edo. México</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-base md:text-lg font-semibold mb-3 text-white">
+                Conecta conmigo
+              </h3>
+              <div class="flex space-x-4">
+                <a
+                  href="https://github.com/itsFdavid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub profile"
+                  class="bg-slate-700 p-3 rounded-full text-slate-300 hover:bg-primary hover:text-black transition-colors"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-github"
+                  >
+                    <path
+                      d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                    ></path>
+                    <path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a
+                ><a
+                  href="https://www.linkedin.com/in/francisco-david-dev/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  class="bg-slate-700 p-3 rounded-full text-slate-300 hover:bg-primary hover:text-black transition-colors"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-linkedin"
+                  >
+                    <path
+                      d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                    ></path>
+                    <rect width="4" height="12" x="2" y="9"></rect>
+                    <circle cx="4" cy="4" r="2"></circle></svg></a
+                ><a
+                  href="mailto:fdavid04@icloud.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Email"
+                  class="bg-slate-700 p-3 rounded-full text-slate-300 hover:bg-primary hover:text-black transition-colors"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-mail"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </ul>
+    <script src="js/index.js" nonce="Y8rTz9uLkW3eHgPQ"></script>
+  </body>
+</html>
