@@ -491,6 +491,78 @@
           <div
             class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full"
           >
+            <!-- Project IsVerceo (Proyecto Estrella con Iframe) -->
+            <div
+              class="bg-background/90 rounded-lg overflow-hidden shadow-lg shadow-primary/20 border-2 border-primary/50 hover:-translate-y-3 transition-transform duration-300 relative group"
+            >
+              <!-- Iframe Preview de IsVerceo -->
+              <div class="h-48 relative overflow-hidden bg-slate-900 border-b border-slate-800 pointer-events-none group-hover:pointer-events-auto transition-all duration-300">
+                
+                <!-- El iframe que carga la página real -->
+                <iframe 
+                  src="https://isverceo.com" 
+                  title="Preview de IsVerceo"
+                  class="w-full h-full scale-[0.65] origin-top-left border-0 absolute top-0 left-0"
+                  style="width: 153%; height: 153%;"
+                  loading="lazy"
+                ></iframe>
+
+                <!-- Overlay interactivo para ir al sitio completo -->
+                <div
+                  class="absolute inset-0 bg-primary/10 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity backdrop-blur-[2px]"
+                >
+                  <a
+                    href="https://isverceo.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit IsVerceo Platform"
+                    class="bg-black/80 text-white font-semibold py-2 px-6 rounded-full border border-primary/50 hover:bg-primary hover:text-black transition-colors transform hover:scale-105"
+                  >
+                    Visitar IsVerceo
+                  </a>
+                </div>
+              </div>
+
+              <div class="p-4 md:p-6 space-y-4">
+                <div class="flex justify-between items-start">
+                  <h3 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                    Plataforma IsVerceo
+                  </h3>
+                  <span class="flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider bg-primary/20 text-primary px-2 py-1 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Destacado
+                  </span>
+                </div>
+                
+                <p class="text-slate-400 text-sm text-justify">
+                  Plataforma como Servicio (PaaS) construida para automatizar el despliegue de aplicaciones. Diseñada con una arquitectura de microservicios, integración de proxy inverso y orquestación de contenedores para alta disponibilidad.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1">NestJS</span>
+                  <span class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1">Docker Swarm</span>
+                  <span class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1">Traefik</span>
+                  <span class="text-xs bg-primary/10 text-primary rounded-full px-3 py-1">Microservicios</span>
+                </div>
+                
+                <!-- Solo el botón de Visitar (Sin GitHub) -->
+                <div class="flex gap-3 pt-2">
+                  <a
+                    href="https://isverceo.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit IsVerceo Platform"
+                    class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-primary text-black hover:bg-primary/90 h-9 rounded-md px-4 flex gap-2 items-center font-bold ease-in-out duration-300 w-full"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
+                      <path d="M15 3h6v6"></path>
+                      <path d="M10 14 21 3"></path>
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    </svg>
+                    <span> Abrir Plataforma </span>
+                  </a>
+                </div>
+              </div>
+            </div>
             <!-- Project gestion escolar in laravel -->
             <div
               class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
