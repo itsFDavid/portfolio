@@ -1708,30 +1708,6 @@
 .font-cascadia-code {
   font-family: "JetBrains Mono", "Cascadia Code", monospace;
 }
-.bg-background {
-  background-color: #0f0f0f;
-}
-.text-primary {
-  color: #00ff88;
-}
-.bg-primary {
-  background-color: #00ff88;
-}
-.border-primary {
-  border-color: #00ff88;
-}
-.bg-primary\/10 {
-  background-color: rgba(0, 255, 136, 0.1);
-}
-.bg-primary\/20 {
-  background-color: rgba(0, 255, 136, 0.2);
-}
-.bg-primary\/5 {
-  background-color: rgba(0, 255, 136, 0.05);
-}
-.hover\:bg-primary\/90:hover {
-  background-color: rgba(0, 255, 136, 0.9);
-}
 @keyframes float {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
