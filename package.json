@@ -17,7 +17,14 @@
   "license": "ISC",
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
+    "@tailwindcss/cli": "^4.1.10",
     "astro": "^5.14.1",
     "tailwindcss": "^4.1.10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }
