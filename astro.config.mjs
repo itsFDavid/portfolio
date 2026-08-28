@@ -1,13 +1,14 @@
-import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: 'https://itsfdavid.com',
+  site: "https://itsfdavid.com",
   integrations: [sitemap()],
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: "auto",
   },
   server: {
-    port: 4321,
+    port: 80,
+    allowedHosts: [".itsfdavid.com"],
   },
 });
