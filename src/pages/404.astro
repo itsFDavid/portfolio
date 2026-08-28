@@ -14,7 +14,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   twitterTitle="404 - Página no encontrada | Francisco David"
   twitterDescription="Oops! Esta página se perdió en el código... Parece que la página que buscas no existe o fue movida a otra dimensión del código."
   twitterImage="/images/francisco_david-svg.svg"
-  bodyClass="bg-background text-white font-cascadia-code min-h-screen overflow-x-hidden"
+  bodyClass="bg-background text-white font-cascadia-code min-h-screen overflow-x-hidden relative"
   enableHeaderScript={false}
   enableNotFoundScript={true}
 >
@@ -28,7 +28,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     style="animation-delay: 1s"
   ></div>
 
-  <div class="min-h-screen flex items-center justify-center px-4 relative">
+  <div class="min-h-screen flex items-center justify-center px-4 relative z-10">
     <div class="text-center max-w-4xl mx-auto">
       <div class="mb-8">
         <div
