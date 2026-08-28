@@ -1,0 +1,28 @@
+---
+export interface Props {
+  label: string;
+  variant?: 'primary' | 'skill' | 'achievement';
+  achievementColor?: 'yellow' | 'blue' | 'green';
+}
+
+const { label, variant = 'primary', achievementColor = 'yellow' } = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  primary: 'text-xs bg-primary/10 text-primary rounded-full px-3 py-1',
+  skill:
+    'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors text-white bg-primary/20 border-primary/30',
+  achievement: 'text-xs px-2 py-1 rounded-full',
+};
+
+const achievementClasses: Record<string, string> = {
+  yellow: 'bg-yellow-100/80 text-yellow-800',
+  blue: 'bg-blue-100/80 text-blue-800',
+  green: 'bg-green-100/80 text-green-800',
+};
+
+const className = variant === 'achievement'
+  ? `${variantClasses.achievement} ${achievementClasses[achievementColor]}`
+  : variantClasses[variant];
+---
+
+<span class={className}>{label}</span>

@@ -2,18 +2,22 @@
   "name": "portfolio-v2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
-    "build": "tailwindcss -i ./src/input.css -o ./src/css/output.css --minify",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "css:dev": "tailwindcss -i ./src/styles/global.css -o ./public/styles/output.css --watch",
+    "css:build": "tailwindcss -i ./src/styles/global.css -o ./public/styles/output.css --minify"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.10",
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.14.1",
     "tailwindcss": "^4.1.10"
   }
 }

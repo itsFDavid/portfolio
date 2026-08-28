@@ -1,0 +1,62 @@
+---
+import SEO from '../components/seo/SEO.astro';
+import Header from '../components/layout/Header.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogType?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  schemaJson?: object;
+  bodyClass?: string;
+  enableHeaderScript?: boolean;
+  enableNotFoundScript?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  ogType,
+  twitterTitle,
+  twitterDescription,
+  twitterImage,
+  schemaJson,
+  bodyClass = 'bg-background text-white font-cascadia-code',
+  enableHeaderScript = true,
+  enableNotFoundScript = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+      ogImage={ogImage}
+      ogType={ogType}
+      twitterTitle={twitterTitle}
+      twitterDescription={twitterDescription}
+      twitterImage={twitterImage}
+      schemaJson={schemaJson}
+    />
+    <link rel="stylesheet" href="/styles/output.css" />
+  </head>
+  <body class={bodyClass}>
+    {!enableNotFoundScript && <Header />}
+    <slot />
+
+    {enableHeaderScript && <script src="/js/header.js" defer></script>}
+    {enableNotFoundScript && <script src="/js/notFound.js" defer></script>}
+  </body>
+</html>

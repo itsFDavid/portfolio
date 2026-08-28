@@ -1,0 +1,29 @@
+---
+import type { Skill } from '../../data/skills';
+import SectionTitle from '../ui/SectionTitle.astro';
+import SkillCard from '../cards/SkillCard.astro';
+
+export interface Props {
+  skills: Skill[];
+}
+
+const { skills } = Astro.props;
+---
+
+<section
+  id="skills"
+  class="min-h-screen flex items-center justify-start px-4 py-16"
+>
+  <div class="w-full mx-auto">
+    <SectionTitle title="Habilidades" />
+
+    <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
+      Aquí están algunas de las tecnologías y herramientas con las que trabajo
+      regularmente.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {skills.map((skill) => <SkillCard skill={skill} />)}
+    </div>
+  </div>
+</section>

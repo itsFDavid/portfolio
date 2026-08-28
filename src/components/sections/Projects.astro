@@ -1,0 +1,59 @@
+---
+import type { Project } from '../../data/projects';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ProjectCard from '../cards/ProjectCard.astro';
+
+export interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+const visibleProjects = projects.filter((p) => !p.hidden);
+const hiddenProjects = projects.filter((p) => p.hidden);
+---
+
+<section
+  id="projects"
+  class="min-h-screen flex items-center justify-start px-4 py-16"
+>
+  <div class="w-full mx-auto">
+    <SectionTitle title="Proyectos" />
+
+    <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
+      Aquí puedes encontrar algunos de mis proyectos más destacados. Cada uno
+      refleja mi pasión por el desarrollo y mi compromiso con la calidad.
+    </p>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full"
+    >
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+
+    {hiddenProjects.length > 0 && (
+      <div class="flex justify-center mt-12">
+        <button
+          class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-slate-800 bg-background hover:bg-primary hover:text-black h-10 px-4 py-2 group cursor-pointer hover:scale-105 ease-in-out duration-300"
+          id="toggle-projects-btn"
+        >
+          <span id="toggle-projects-text">Ver más proyectos</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-code ml-2 group-hover:translate-x-1 transition-transform"
+          >
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </button>
+      </div>
+    )}
+  </div>
+</section>
