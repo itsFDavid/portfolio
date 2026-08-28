@@ -1,0 +1,142 @@
+---
+import type { Skill } from '../../data/skills';
+import Tag from '../ui/Tag.astro';
+
+export interface Props {
+  skill: Skill;
+}
+
+const { skill } = Astro.props;
+---
+
+<div
+  class="bg-background/90 rounded-lg overflow-hidden shadow-sm border border-slate-800 hover:-translate-y-3 transition-transform duration-300 relative group"
+>
+  <div class="p-4 md:p-6 space-y-4">
+    <h3
+      class="text-base md:text-lg font-bold text-white flex items-center gap-2 mb-3"
+    >
+      <div
+        class="p-2 bg-primary/10 text-primary rounded-md hover:rotate-12 hover:scale-105 transition-transform duration-300"
+      >
+        {skill.icon === 'code' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-code h-4 w-4 md:h-5 md:w-5"
+          >
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        )}
+        {skill.icon === 'panels' && skill.id === 'frontend' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-layout-grid h-4 w-4 md:h-5 md:w-5"
+          >
+            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+            <path d="M3 9h18"></path>
+            <path d="M9 21V9"></path>
+          </svg>
+        )}
+        {skill.icon === 'panels' && skill.id === 'lenguajes' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-square-terminal h-4 w-4 md:h-5 md:w-5"
+          >
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" x2="20" y1="19" y2="19"></line>
+          </svg>
+        )}
+        {skill.icon === 'database' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-database h-4 w-4 md:h-5 md:w-5"
+          >
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+            <path d="M3 12A9 3 0 0 0 21 12"></path>
+          </svg>
+        )}
+        {skill.icon === 'cpu' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-cpu h-4 w-4 md:h-5 md:w-5"
+          >
+            <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+            <rect width="6" height="6" x="9" y="9" rx="1"></rect>
+            <path d="M15 2v2"></path>
+            <path d="M15 20v2"></path>
+            <path d="M2 15h2"></path>
+            <path d="M2 9h2"></path>
+            <path d="M20 15h2"></path>
+            <path d="M20 9h2"></path>
+            <path d="M9 2v2"></path>
+            <path d="M9 20v2"></path>
+          </svg>
+        )}
+        {skill.icon === 'key' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-key h-4 w-4 md:h-5 md:w-5"
+          >
+            <path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"></path>
+            <path d="m21 2-9.6 9.6"></path>
+            <circle cx="7.5" cy="15.5" r="5.5"></circle>
+          </svg>
+        )}
+      </div>
+      {skill.title}
+    </h3>
+    <div class="flex flex-wrap gap-2">
+      {skill.tags.map((tag) => <Tag label={tag} variant="primary" />)}
+    </div>
+  </div>
+</div>

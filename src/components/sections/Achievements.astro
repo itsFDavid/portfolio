@@ -1,0 +1,105 @@
+---
+import type { Achievement } from '../../data/achievements';
+import SectionTitle from '../ui/SectionTitle.astro';
+import AchievementCard from '../cards/AchievementCard.astro';
+
+export interface Props {
+  achievements: Achievement[];
+}
+
+const { achievements } = Astro.props;
+---
+
+<section
+  id="achievements"
+  class="min-h-screen flex items-center justify-start px-4 py-16"
+>
+  <div class="w-full mx-auto">
+    <SectionTitle title="Logros y Reconocimientos" underlineWidth="w-29" />
+
+    <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
+      Algunas certificaciones, cursos y logros que he obtenido a lo largo de mi
+      carrera.
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-between mb-6 space-y-2 sm:space-y-0 sm:space-x-2">
+      <div class="flex items-center text-slate-600 text-sm justify-center sm:justify-start">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-grip h-4 w-4 mr-2"
+        >
+          <circle cx="12" cy="5" r="1"></circle>
+          <circle cx="19" cy="5" r="1"></circle>
+          <circle cx="5" cy="5" r="1"></circle>
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="19" cy="12" r="1"></circle>
+          <circle cx="5" cy="12" r="1"></circle>
+          <circle cx="12" cy="19" r="1"></circle>
+          <circle cx="19" cy="19" r="1"></circle>
+          <circle cx="5" cy="19" r="1"></circle>
+        </svg>
+        <span class="text-sm hidden md:inline">Desliza para ver mas</span>
+        <span class="text-sm md:hidden">Desliza</span>
+      </div>
+      <div class="flex space-x-2 justify-center sm:justify-end">
+        <button
+          class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-slate-800 bg-background hover:bg-background hover:text-accent-foreground h-10 w-10 rounded-full"
+          aria-label="Scroll left"
+          id="scroll-left"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-left h-4 w-4"
+          >
+            <path d="m15 18-6-6 6-6"></path>
+          </svg>
+        </button>
+        <button
+          class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-slate-800 bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full"
+          aria-label="Scroll right"
+          id="scroll-right"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-right h-4 w-4"
+          >
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="achievements-carousel"
+      class="flex overflow-x-auto pb-6 space-x-6 snap-x scrollbar-hidden cursor-grab scroll-smooth"
+    >
+      {achievements.map((achievement) => (
+        <AchievementCard achievement={achievement} />
+      ))}
+    </div>
+  </div>
+</section>

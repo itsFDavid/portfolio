@@ -1,0 +1,62 @@
+---
+import { navigation } from '../../data/navigation';
+---
+
+<header
+  class="text-white fixed top-0 w-full z-50 bg-background/70 backdrop-blur-sm"
+>
+  <nav class="py-4 md:py-6">
+    <ul
+      class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 justify-between items-center container mx-auto px-4"
+    >
+      <div class="w-full md:w-auto flex justify-between items-center">
+        <a href="/" class="text-primary text-xl md:text-2xl font-bold">FD.</a>
+        <button class="md:hidden text-white" id="mobile-menu-toggle" aria-label="Toggle menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" x2="21" y1="6" y2="6"></line>
+            <line x1="3" x2="21" y1="12" y2="12"></line>
+            <line x1="3" x2="21" y1="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden md:flex space-x-4" id="desktop-menu">
+        {
+          navigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="hover:text-primary transition-colors text-sm md:text-base"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </div>
+      <div class="w-full md:hidden mt-4 hidden" id="mobile-menu">
+        <div class="flex flex-col space-y-3 text-left bg-background/90 rounded-lg p-4">
+          {
+            navigation.map((item) => (
+              <a
+                href={item.href}
+                class="hover:text-primary transition-colors py-2"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </ul>
+  </nav>
+</header>
