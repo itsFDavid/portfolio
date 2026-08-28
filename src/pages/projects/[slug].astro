@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DetailHeader from '../../components/ui/DetailHeader.astro';
+import DetailSection from '../../components/ui/DetailSection.astro';
+import DiagramaRed from '../../components/sections/projects/homelab/DiagramaRed.astro';
+import DiagramaServicios from '../../components/sections/projects/homelab/DiagramaServicios.astro';
+import Tag from '../../components/ui/Tag.astro';
+import { projects } from '../../data/projects';
+import { projectDetails } from '../../data/projectDetails';
+
+export async function getStaticPaths() {
+  return projects
+    .filter((project) => project.detailUrl && projectDetails[project.id])
+    .map((project) => ({
+      params: { slug: project.id },
+      props: { project },
+    }));
+}
+
+const { slug } = Astro.params;
+const { project } = Astro.props;
+const detail = projectDetails[project.id];
+
+if (!project || !detail) {
+  return Astro.redirect('/404');
+}
+---
+
+<BaseLayout
+  title={`${project.title} | Francisco David`}
+  description={project.description}
+  ogTitle={project.title}
+  ogDescription={project.description}
+  ogType="article"
+>
+  <article class="min-h-screen pt-24 md:pt-32 pb-20">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <DetailHeader
+        eyebrow="Proyecto Destacado · Homelab"
+        title={project.title}
+        description={project.description}
+        tags={project.tags}
+      />
+
+      <!-- 1. Objetivo -->
+      <section class="mb-16">
+        <DetailSection
+          id="objetivo"
+          eyebrow="01 · Objetivo"
+          title="¿Por qué un homelab?"
+        >
+          <p class="text-slate-400 leading-relaxed">{detail.objetivoIntro}</p>
+          <p
+            class="text-slate-300 leading-relaxed mt-4 p-4 border-l-2 border-primary/50 bg-primary/5 rounded-r"
+          >
+            {detail.objetivo}
+          </p>
+        </DetailSection>
+      </section>
+
+      <!-- 2. Arquitectura -->
+      <section class="mb-16">
+        <DetailSection
+          id="arquitectura"
+          eyebrow="02 · Arquitectura"
+          title="Qué construí"
+        >
+          <p class="text-slate-400 leading-relaxed mb-6">
+            {detail.arquitecturaIntro}
+          </p>
+
+          <dl
+            class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10 p-4 bg-background/50 border border-slate-800 rounded-lg"
+          >
+            {
+              detail.arquitectura.items.map((item) => (
+                <div class="flex flex-col gap-1">
+                  <dt class="text-xs font-mono text-slate-500 uppercase tracking-wider">
+                    {item.label}
+                  </dt>
+                  <dd class="text-sm text-slate-200 font-mono">
+                    {item.value}
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+
+          <h3
+            class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3"
+          >
+            {detail.diagramas.topologiaLabel}
+          </h3>
+          <div
+            class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 mb-10 overflow-x-auto"
+          >
+            <DiagramaRed />
+          </div>
+
+          <h3
+            class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3"
+          >
+            {detail.diagramas.serviciosLabel}
+          </h3>
+          <div
+            class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 overflow-x-auto"
+          >
+            <DiagramaServicios />
+          </div>
+        </DetailSection>
+      </section>
+
+      <!-- 3. Aprendizaje -->
+      <section class="mb-16">
+        <DetailSection
+          id="aprendizaje"
+          eyebrow="03 · Aprendizaje"
+          title="Qué aprendí"
+        >
+          <p class="text-slate-400 leading-relaxed mb-8">
+            {detail.aprendizaje.intro}
+          </p>
+
+          <div class="space-y-6">
+            {
+              detail.aprendizaje.puntos.map((punto, index) => (
+                <article class="border border-slate-800 rounded-lg p-5 hover:border-primary/50 transition-colors bg-background/30">
+                  <header class="flex items-start gap-3 mb-3">
+                    <span class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary font-mono font-bold text-sm">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h3 class="text-lg font-bold text-white leading-snug">
+                      {punto.title}
+                    </h3>
+                  </header>
+                  <p class="text-slate-400 leading-relaxed pl-11">
+                    {punto.description}
+                  </p>
+                </article>
+              ))
+            }
+          </div>
+        </DetailSection>
+      </section>
+
+      <!-- 4. Hallazgo de seguridad -->
+      <section class="mb-16">
+        <DetailSection
+          id="hallazgo"
+          eyebrow="04 · Hallazgo crítico"
+          title="Dependencia circular del firewall"
+          variant="warning"
+        >
+          <p class="text-orange-300/90 leading-relaxed mb-6 font-medium">
+            {detail.hallazgo.resumen}
+          </p>
+
+          <h3
+            class="text-sm font-mono uppercase tracking-widest text-orange-400 mb-3"
+          >
+            Implicaciones
+          </h3>
+          <ul class="space-y-2 mb-8">
+            {
+              detail.hallazgo.implicaciones.map((item) => (
+                <li class="flex gap-3 text-slate-300 leading-relaxed">
+                  <span class="text-orange-400 mt-1 flex-shrink-0">▸</span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <h3
+            class="text-sm font-mono uppercase tracking-widest text-primary mb-3"
+          >
+            Recomendaciones técnicas
+          </h3>
+          <ul class="space-y-2 mb-8">
+            {
+              detail.hallazgo.recomendaciones.map((item) => (
+                <li class="flex gap-3 text-slate-300 leading-relaxed">
+                  <span class="text-primary mt-1 flex-shrink-0">▸</span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </DetailSection>
+      </section>
+
+      <!-- 5. Stack técnico -->
+      <section class="mb-16">
+        <DetailSection
+          id="stack"
+          eyebrow="05 · Stack"
+          title="Stack técnico"
+        >
+          <div class="flex flex-wrap gap-2">
+            {detail.stack.map((item) => <Tag label={item} variant="primary" />)}
+          </div>
+        </DetailSection>
+      </section>
+
+      <!-- 6. Enlace a manual completo -->
+      {
+        detail.manualUrl && (
+          <section class="mb-8">
+            <div class="border border-primary/30 rounded-lg p-8 bg-primary/5 flex flex-col items-center text-center gap-5">
+              <div>
+                <p class="text-xs font-mono tracking-widest uppercase text-primary mb-2">
+                  Documentación
+                </p>
+                <h3 class="text-lg font-bold text-white mb-2">
+                  ¿Quieres ver el detalle técnico completo?
+                </h3>
+                <p class="text-sm text-slate-400 max-w-md mx-auto">
+                  Manual con inventario, configuración de red, certificados y
+                  comandos de verificación.
+                </p>
+              </div>
+              <a
+                href={detail.manualUrl}
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-black hover:bg-primary/90 h-11 px-6 py-2 font-bold border border-transparent hover:scale-105 transition-transform"
+                aria-label="Ver documentación técnica completa del homelab"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-file-text"
+                >
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                  <path d="M10 9H8" />
+                  <path d="M16 13H8" />
+                  <path d="M16 17H8" />
+                </svg>
+                {detail.manualLabel ?? 'Ver documentación completa'}
+              </a>
+            </div>
+          </section>
+        )
+      }
+
+      <!-- Footer navegación -->
+      <footer class="border-t border-slate-800 pt-6 flex justify-between items-center">
+        <a
+          href="/#projects"
+          class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-primary transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m12 19-7-7 7-7"></path>
+            <path d="M19 12H5"></path>
+          </svg>
+          Volver a proyectos
+        </a>
+        <a
+          href="/#contact"
+          class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-primary transition-colors"
+        >
+          Contactar
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>

@@ -116,8 +116,40 @@ const { project } = Astro.props;
       {project.tags.map((tag) => <Tag label={tag} variant="primary" />)}
     </div>
 
-    {(project.demoUrl || project.repoUrl) && (
+    {(project.demoUrl || project.repoUrl || project.detailUrl) && (
       <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        {project.detailUrl && project.detailLabel && (
+          <a
+            href={project.detailUrl}
+            aria-label={`Ver detalle de ${project.title}`}
+            class:list={[
+              'justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input h-9 rounded-md px-3 flex gap-2 items-center ease-in-out duration-300',
+              project.featured
+                ? 'bg-primary text-black hover:bg-primary/90 w-full font-bold border-transparent px-4'
+                : 'bg-background hover:bg-accent hover:text-accent-foreground border-slate-800 hover:bg-primary/90 hover:text-black',
+            ]}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-file-text"
+            >
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+              <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+              <path d="M10 9H8"></path>
+              <path d="M16 13H8"></path>
+              <path d="M16 17H8"></path>
+            </svg>
+            <span>{project.detailLabel}</span>
+          </a>
+        )}
         {project.demoUrl && project.demoLabel && (
           <a
             href={project.demoUrl}

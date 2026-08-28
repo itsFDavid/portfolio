@@ -8,6 +8,8 @@ export interface Project {
   demoLabel?: string;
   repoUrl?: string;
   repoLabel?: string;
+  detailUrl?: string;
+  detailLabel?: string;
   featured?: boolean;
   hidden?: boolean;
   iframe?: {
@@ -16,6 +18,17 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: 'homelab-infrastructure',
+    title: 'Homelab Infrastructure — Proxmox + OPNsense + k3s',
+    description:
+      'Laboratorio de infraestructura propio para tener recursos de desarrollo, testing y proyectos personales sin pagar VPS/cloud, con segmentación de red por VLANs y virtualización completa.',
+    image: '/images/homelab.svg',
+    tags: ['Proxmox VE', 'OPNsense', 'k3s', 'Apache Guacamole', 'VLAN', 'Networking'],
+    detailUrl: '/projects/homelab-infrastructure',
+    detailLabel: 'Ver Detalle',
+    featured: true,
+  },
   {
     id: 'isverceo',
     title: 'Plataforma IsVerceo',
@@ -30,16 +43,6 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 'gestion-escolar',
-    title: 'Gestion Escolar con Laravel',
-    description:
-      'Un sistema de gestión escolar desarrollado en Laravel que permite administrar estudiantes, cursos y calificaciones de manera eficiente.',
-    image: '/images/gestion_escolar.webp',
-    tags: ['Laravel', 'MySQL', 'Blade Php', 'Tailwind CSS'],
-    repoUrl: 'https://github.com/School-Rating-Management/rating-management-laravel',
-    repoLabel: 'GitHub',
-  },
-  {
     id: 'tiendas-don-pepe',
     title: 'E-commerce Tiendas Don Pepe',
     description:
@@ -50,6 +53,17 @@ export const projects: Project[] = [
     repoLabel: 'GitHub API',
     demoUrl: 'https://tiendas-pepe.itsfdavid.com/login',
     demoLabel: 'Ver Sitio',
+  },
+  {
+    id: 'gestion-escolar',
+    title: 'Gestion Escolar con Laravel',
+    description:
+      'Un sistema de gestión escolar desarrollado en Laravel que permite administrar estudiantes, cursos y calificaciones de manera eficiente.',
+    image: '/images/gestion_escolar.webp',
+    tags: ['Laravel', 'MySQL', 'Blade Php', 'Tailwind CSS'],
+    repoUrl: 'https://github.com/School-Rating-Management/rating-management-laravel',
+    repoLabel: 'GitHub',
+    hidden: true,
   },
   {
     id: 'memory-game',

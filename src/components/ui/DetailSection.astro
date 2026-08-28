@@ -1,0 +1,32 @@
+---
+export interface Props {
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  variant?: 'default' | 'warning';
+}
+
+const { id, eyebrow, title, variant = 'default' } = Astro.props;
+---
+
+<header class="mb-6" id={id}>
+  {eyebrow && (
+    <p
+      class:list={[
+        'text-xs font-mono tracking-widest uppercase mb-2',
+        variant === 'warning' ? 'text-orange-400' : 'text-primary',
+      ]}
+    >
+      {eyebrow}
+    </p>
+  )}
+  <h2
+    class:list={[
+      'text-xl md:text-2xl font-bold mb-3 relative inline-block after:content-[""] after:block after:h-1 after:mt-2',
+      variant === 'warning' ? 'after:bg-orange-400' : 'after:bg-primary',
+    ]}
+  >
+    {title}
+  </h2>
+  <slot />
+</header>

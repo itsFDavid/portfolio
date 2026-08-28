@@ -21,10 +21,9 @@
     "astro": "^5.14.1",
     "tailwindcss": "^4.1.10"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=9.15 <10"
   }
 }
