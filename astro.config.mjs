@@ -8,7 +8,7 @@ export default defineConfig({
     inlineStylesheets: "auto",
   },
   server: {
-    port: 80,
+    port: 4321,
     allowedHosts: [".itsfdavid.com"],
   },
 });
