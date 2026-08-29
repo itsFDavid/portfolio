@@ -1,0 +1,177 @@
+---
+// Diagrama de Flujo de Despliegue - IsVerceo
+// Secuencia: Login -> Crear Proyecto -> Deploy (Build -> Registry -> Swarm)
+// Sin exponer variables internas ni endpoints
+---
+
+<svg
+  viewBox="0 0 1200 1000"
+  role="img"
+  aria-labelledby="flow-title flow-desc"
+  class="w-full h-auto"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <title id="flow-title">Flujo de Despliegue - IsVerceo</title>
+  <desc id="flow-desc">
+    Secuencia de fases: autenticación del usuario, creación del proyecto,
+    build con Nixpacks o Railpack, publicación en registry privado y
+    despliegue en Docker Swarm.
+  </desc>
+
+  <defs>
+    <marker id="f-arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="var(--color-primary)"></polygon>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="40" fill="white" font-size="20" font-family="monospace" text-anchor="middle" font-weight="700">Flujo de Despliegue</text>
+  <text x="600" y="62" fill="#94a3b8" font-size="11" font-family="monospace" text-anchor="middle">del push a GitHub hasta la app corriendo en producción</text>
+
+  <!-- ====== Phase 1: Authentication ====== -->
+  <g>
+    <rect x="60" y="100" width="1080" height="130" rx="10" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+    <text x="90" y="124" fill="var(--color-primary)" font-size="10" font-family="monospace" letter-spacing="0.14em">PHASE 1 · AUTHENTICATION</text>
+
+    <rect x="100" y="140" width="180" height="70" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="190" y="166" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">User</text>
+    <text x="190" y="186" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Click "Login"</text>
+    <text x="190" y="200" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">frontend</text>
+
+    <rect x="340" y="140" width="180" height="70" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="430" y="166" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Gateway</text>
+    <text x="430" y="186" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">OAuth GitHub</text>
+    <text x="430" y="200" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Passport strategy</text>
+
+    <rect x="580" y="140" width="200" height="70" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="680" y="166" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">auth-ms</text>
+    <text x="680" y="186" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Cifra token GitHub</text>
+    <text x="680" y="200" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">emite JWT cifrado</text>
+
+    <rect x="840" y="140" width="260" height="70" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="970" y="166" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">encrypt-ms</text>
+    <text x="970" y="186" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">AES-256-GCM</text>
+    <text x="970" y="200" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">rotación de claves</text>
+
+    <line x1="280" y1="175" x2="340" y2="175" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="520" y1="175" x2="580" y2="175" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="780" y1="175" x2="840" y2="175" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+  </g>
+
+  <!-- ====== Phase 2: Project creation ====== -->
+  <g>
+    <rect x="60" y="270" width="1080" height="120" rx="10" fill="rgba(100, 116, 139, 0.05)" stroke="#475569" stroke-width="1"></rect>
+    <text x="90" y="294" fill="#94a3b8" font-size="10" font-family="monospace" letter-spacing="0.14em">PHASE 2 · PROJECT CREATION</text>
+
+    <rect x="100" y="310" width="180" height="60" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="190" y="334" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">User</text>
+    <text x="190" y="352" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Create project</text>
+
+    <rect x="340" y="310" width="180" height="60" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="430" y="334" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Gateway</text>
+    <text x="430" y="352" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">RMQ → projects-ms</text>
+
+    <rect x="580" y="310" width="200" height="60" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="680" y="334" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">projects-ms</text>
+    <text x="680" y="352" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">CRUD + persist</text>
+
+    <rect x="840" y="310" width="260" height="60" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="970" y="334" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">PostgreSQL</text>
+    <text x="970" y="352" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Project record</text>
+
+    <line x1="280" y1="340" x2="340" y2="340" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="520" y1="340" x2="580" y2="340" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="780" y1="340" x2="840" y2="340" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"></line>
+  </g>
+
+  <!-- ====== Phase 3: Deploy trigger ====== -->
+  <g>
+    <rect x="60" y="430" width="1080" height="100" rx="10" fill="rgba(100, 116, 139, 0.05)" stroke="#475569" stroke-width="1"></rect>
+    <text x="90" y="454" fill="#94a3b8" font-size="10" font-family="monospace" letter-spacing="0.14em">PHASE 3 · DEPLOY TRIGGER</text>
+
+    <rect x="100" y="470" width="180" height="50" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="190" y="490" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">User</text>
+    <text x="190" y="506" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">POST /deploy</text>
+
+    <rect x="340" y="470" width="180" height="50" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="430" y="490" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Gateway</text>
+    <text x="430" y="506" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">forward</text>
+
+    <rect x="580" y="470" width="200" height="50" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="680" y="490" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">projects-ms</text>
+    <text x="680" y="506" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">orchestrate</text>
+
+    <rect x="840" y="470" width="260" height="50" rx="6" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+    <text x="970" y="490" fill="var(--color-primary)" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">deployments-ms</text>
+    <text x="970" y="506" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">recibe orden</text>
+
+    <line x1="280" y1="495" x2="340" y2="495" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="520" y1="495" x2="580" y2="495" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="780" y1="495" x2="840" y2="495" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+  </g>
+
+  <!-- ====== Phase 4: Build (Nixpacks / Railpack) ====== -->
+  <g>
+    <rect x="60" y="570" width="1080" height="180" rx="10" fill="rgba(100, 116, 139, 0.05)" stroke="#475569" stroke-width="1"></rect>
+    <text x="90" y="594" fill="#94a3b8" font-size="10" font-family="monospace" letter-spacing="0.14em">PHASE 4 · BUILD</text>
+
+    <rect x="100" y="610" width="200" height="60" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="200" y="632" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Clone repo</text>
+    <text x="200" y="650" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">GitHub access</text>
+
+    <rect x="320" y="610" width="200" height="60" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="420" y="632" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Detect stack</text>
+    <text x="420" y="650" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Node · Python · Static</text>
+
+    <rect x="540" y="610" width="220" height="60" rx="6" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+    <text x="650" y="632" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Build runner</text>
+    <text x="650" y="650" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Nixpacks · Railpack</text>
+
+    <rect x="780" y="610" width="320" height="60" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="940" y="632" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Sanitize secrets</text>
+    <text x="940" y="650" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">token redaction in logs</text>
+
+    <line x1="300" y1="640" x2="320" y2="640" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="520" y1="640" x2="540" y2="640" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="760" y1="640" x2="780" y2="640" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"></line>
+
+    <rect x="100" y="690" width="1000" height="40" rx="6" fill="rgba(15, 23, 42, 0.4)" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"></rect>
+    <text x="600" y="714" fill="#94a3b8" font-size="11" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">DISTRIBUTED CANCELLATION · Redis Pub/Sub + AbortController</text>
+  </g>
+
+  <!-- ====== Phase 5: Deploy to Swarm ====== -->
+  <g>
+    <rect x="60" y="790" width="1080" height="170" rx="10" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+    <text x="90" y="814" fill="var(--color-primary)" font-size="10" font-family="monospace" letter-spacing="0.14em">PHASE 5 · DEPLOY</text>
+
+    <rect x="100" y="830" width="200" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="200" y="852" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">Image</text>
+    <text x="200" y="872" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">tenant/&#123;tenantId&#125;/&#123;projectId&#125;</text>
+    <text x="200" y="888" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">:build</text>
+    <text x="200" y="910" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Private registry</text>
+
+    <rect x="340" y="830" width="240" height="100" rx="6" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+    <rect x="348" y="838" width="96" height="14" rx="2" fill="rgba(0, 255, 136, 0.15)" stroke="var(--color-primary)" stroke-width="0.8"></rect>
+    <text x="396" y="848" fill="var(--color-primary)" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">DOCKER SWARM</text>
+    <text x="460" y="876" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Manager node</text>
+    <text x="460" y="894" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">docker stack deploy</text>
+    <text x="460" y="910" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">read-only FS · non-root</text>
+
+    <rect x="620" y="830" width="240" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="740" y="852" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">User container</text>
+    <text x="740" y="872" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">resource limits</text>
+    <text x="740" y="888" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">per plan (FREE/PRO)</text>
+    <text x="740" y="910" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">&#123;subdomain&#125;.isverceo.com</text>
+
+    <rect x="900" y="830" width="220" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <text x="1010" y="852" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">PostgreSQL</text>
+    <text x="1010" y="872" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Mark RUNNING</text>
+    <text x="1010" y="888" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Update Project</text>
+    <text x="1010" y="910" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Prisma transaction</text>
+
+    <line x1="300" y1="880" x2="340" y2="880" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="580" y1="880" x2="620" y2="880" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#f-arr)"></line>
+    <line x1="860" y1="880" x2="900" y2="880" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"></line>
+    <text x="320" y="872" fill="var(--color-primary)" font-size="8" font-family="monospace">pull</text>
+  </g>
+</svg>

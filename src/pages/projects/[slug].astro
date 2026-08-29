@@ -2,11 +2,27 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DetailHeader from '../../components/ui/DetailHeader.astro';
 import DetailSection from '../../components/ui/DetailSection.astro';
+import Tag from '../../components/ui/Tag.astro';
 import DiagramaRed from '../../components/sections/projects/homelab/DiagramaRed.astro';
 import DiagramaServicios from '../../components/sections/projects/homelab/DiagramaServicios.astro';
-import Tag from '../../components/ui/Tag.astro';
+import DiagramaArquitectura from '../../components/sections/projects/isverceo/DiagramaArquitectura.astro';
+import DiagramaFlujo from '../../components/sections/projects/isverceo/DiagramaFlujo.astro';
 import { projects } from '../../data/projects';
 import { projectDetails } from '../../data/projectDetails';
+
+const diagramasPorSlug: Record<
+  string,
+  { primero: any; segundo: any }
+> = {
+  'homelab-infrastructure': {
+    primero: DiagramaRed,
+    segundo: DiagramaServicios,
+  },
+  isverceo: {
+    primero: DiagramaArquitectura,
+    segundo: DiagramaFlujo,
+  },
+};
 
 export async function getStaticPaths() {
   return projects
@@ -24,6 +40,8 @@ const detail = projectDetails[project.id];
 if (!project || !detail) {
   return Astro.redirect('/404');
 }
+
+const Diagramas = diagramasPorSlug[project.id];
 ---
 
 <BaseLayout
@@ -36,7 +54,7 @@ if (!project || !detail) {
   <article class="min-h-screen pt-24 md:pt-32 pb-20">
     <div class="container mx-auto px-4 max-w-5xl">
       <DetailHeader
-        eyebrow="Proyecto Destacado · Homelab"
+        eyebrow={detail.headerEyebrow}
         title={project.title}
         description={project.description}
         tags={project.tags}
@@ -47,7 +65,7 @@ if (!project || !detail) {
         <DetailSection
           id="objetivo"
           eyebrow="01 · Objetivo"
-          title="¿Por qué un homelab?"
+          title={detail.objetivoTitulo}
         >
           <p class="text-slate-400 leading-relaxed">{detail.objetivoIntro}</p>
           <p
@@ -86,27 +104,31 @@ if (!project || !detail) {
             }
           </dl>
 
-          <h3
-            class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3"
-          >
-            {detail.diagramas.topologiaLabel}
-          </h3>
-          <div
-            class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 mb-10 overflow-x-auto"
-          >
-            <DiagramaRed />
-          </div>
+          {Diagramas && (
+            <>
+              <h3
+                class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3"
+              >
+                {detail.diagramas.topologiaLabel}
+              </h3>
+              <div
+                class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 mb-10 overflow-x-auto"
+              >
+                <Diagramas.primero />
+              </div>
 
-          <h3
-            class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3"
-          >
-            {detail.diagramas.serviciosLabel}
-          </h3>
-          <div
-            class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 overflow-x-auto"
-          >
-            <DiagramaServicios />
-          </div>
+              <h3
+                class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3"
+              >
+                {detail.diagramas.serviciosLabel}
+              </h3>
+              <div
+                class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 overflow-x-auto"
+              >
+                <Diagramas.segundo />
+              </div>
+            </>
+          )}
         </DetailSection>
       </section>
 
@@ -147,45 +169,53 @@ if (!project || !detail) {
       <section class="mb-16">
         <DetailSection
           id="hallazgo"
-          eyebrow="04 · Hallazgo crítico"
-          title="Dependencia circular del firewall"
+          eyebrow="04 · Decisión de diseño"
+          title={detail.hallazgo.titulo}
           variant="warning"
         >
           <p class="text-orange-300/90 leading-relaxed mb-6 font-medium">
             {detail.hallazgo.resumen}
           </p>
 
-          <h3
-            class="text-sm font-mono uppercase tracking-widest text-orange-400 mb-3"
-          >
-            Implicaciones
-          </h3>
-          <ul class="space-y-2 mb-8">
-            {
-              detail.hallazgo.implicaciones.map((item) => (
-                <li class="flex gap-3 text-slate-300 leading-relaxed">
-                  <span class="text-orange-400 mt-1 flex-shrink-0">▸</span>
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
+          {detail.hallazgo.implicaciones.length > 0 && (
+            <>
+              <h3
+                class="text-sm font-mono uppercase tracking-widest text-orange-400 mb-3"
+              >
+                Lo que esto implica
+              </h3>
+              <ul class="space-y-2 mb-8">
+                {
+                  detail.hallazgo.implicaciones.map((item) => (
+                    <li class="flex gap-3 text-slate-300 leading-relaxed">
+                      <span class="text-orange-400 mt-1 flex-shrink-0">▸</span>
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </>
+          )}
 
-          <h3
-            class="text-sm font-mono uppercase tracking-widest text-primary mb-3"
-          >
-            Recomendaciones técnicas
-          </h3>
-          <ul class="space-y-2 mb-8">
-            {
-              detail.hallazgo.recomendaciones.map((item) => (
-                <li class="flex gap-3 text-slate-300 leading-relaxed">
-                  <span class="text-primary mt-1 flex-shrink-0">▸</span>
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
+          {detail.hallazgo.recomendaciones.length > 0 && (
+            <>
+              <h3
+                class="text-sm font-mono uppercase tracking-widest text-primary mb-3"
+              >
+                Cómo lo abordaría hoy
+              </h3>
+              <ul class="space-y-2 mb-8">
+                {
+                  detail.hallazgo.recomendaciones.map((item) => (
+                    <li class="flex gap-3 text-slate-300 leading-relaxed">
+                      <span class="text-primary mt-1 flex-shrink-0">▸</span>
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </>
+          )}
         </DetailSection>
       </section>
 

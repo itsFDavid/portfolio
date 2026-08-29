@@ -35,6 +35,8 @@ export const projects: Project[] = [
     description:
       'Plataforma como Servicio (PaaS) construida para automatizar el despliegue de aplicaciones. Diseñada con una arquitectura de microservicios, integración de proxy inverso y orquestación de contenedores para alta disponibilidad.',
     tags: ['NestJS', 'Docker Swarm', 'Traefik', 'Microservicios'],
+    detailUrl: '/projects/isverceo',
+    detailLabel: 'Ver Detalle',
     demoUrl: 'https://isverceo.com',
     demoLabel: 'Abrir Plataforma',
     featured: true,

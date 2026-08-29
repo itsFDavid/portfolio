@@ -1,5 +1,7 @@
 export interface ProjectDetailContent {
   slug: string;
+  headerEyebrow: string;
+  objetivoTitulo: string;
   objetivo: string;
   objetivoIntro: string;
   arquitecturaIntro: string;
@@ -28,6 +30,8 @@ export interface ProjectDetailContent {
 export const projectDetails: Record<string, ProjectDetailContent> = {
   'homelab-infrastructure': {
     slug: 'homelab-infrastructure',
+    headerEyebrow: 'Proyecto Destacado · Homelab',
+    objetivoTitulo: '¿Por qué un homelab propio?',
     objetivo:
       'Tener infraestructura propia (VMs, servicios, entornos de prueba) sin depender de VPS de pago, aprovechando hardware propio con virtualización completa y segmentación de red por VLANs para aislar cada proyecto o entorno.',
     objetivoIntro:
@@ -82,21 +86,15 @@ export const projectDetails: Record<string, ProjectDetailContent> = {
       ],
     },
     hallazgo: {
-      titulo: 'Hallazgo de seguridad crítico: dependencia circular del firewall',
+      titulo: 'El problema que descubrí diseñando la red: el firewall depende del hypervisor',
       resumen:
-        'Durante el diseño detecté un problema arquitectónico serio: el firewall OPNsense corre como VM dentro del mismo Proxmox que se supone debe proteger. Esto crea una dependencia circular y un single point of failure importante.',
+        'Algo que no vi venir hasta que lo dibujé en papel: el firewall OPNsense corre como una VM dentro del mismo servidor Proxmox que se supone que debe proteger. Si el host cae, cae el firewall Y todos los servicios a la vez. Es un single point of failure que ningún diagrama te muestra hasta que lo buscas.',
       implicaciones: [
-        'Single Point of Failure: si el host Proxmox cae, se pierde el firewall Y todos los servicios simultáneamente. No hay red de seguridad.',
-        'Problema de bootstrapping: el firewall depende del hypervisor para arrancar, lo cual es conceptualmente contradictorio con su rol de protección perimetral.',
-        'Potencial bypass: tráfico interno entre VMs podría evadir el firewall si Proxmox enruta por bridges sin pasar por OPNsense.',
-        'Acceso de gestión: administrar Proxmox requiere un camino que bypasea el firewall (consola directa, IP de management en otra VLAN, etc.), abriendo vectores.',
+        'Esto contradice directamente la promesa de un firewall dedicado: el firewall depende del hypervisor para arrancar, lo cual es conceptualmente circular. Un boot failure del host = sin red Y sin protección.',
+        'El tráfico interno entre VMs puede evadir el firewall si Proxmox enruta por bridges sin pasar por OPNsense. Hay que auditar cada bridge y cada VLAN para confirmar que todo pasa por el firewall.',
+        'Administrar Proxmox requiere un camino que bypasea el firewall (consola, IP de management en VLAN aparte, etc.), abriendo vectores que el firewall no ve.',
       ],
-      recomendaciones: [
-        'Migrar OPNsense a hardware físico dedicado (mini PC con 2+ NICs) como firewall perimetral externo al servidor Proxmox.',
-        'Implementar Alta Disponibilidad (HA) con un segundo nodo Proxmox para cluster, almacenamiento compartido (NFS/iSCSI) y migración en vivo de VMs críticas.',
-        'Adoptar Infrastructure as Code con Terraform/Ansible para que toda la configuración (VLANs, reglas, VMs) sea declarativa, versionada y reproducible.',
-        'Configurar IDS/IPS en OPNsense (Suricata) y logging centralizado de seguridad para detectar anomalías.',
-      ],
+      recomendaciones: [],
     },
     stack: [
       'Proxmox VE',
@@ -110,5 +108,92 @@ export const projectDetails: Record<string, ProjectDetailContent> = {
     ],
     manualUrl: '/Manual_Homelab_public.md',
     manualLabel: 'Ver documentación técnica completa',
+  },
+  'isverceo': {
+    slug: 'isverceo',
+    headerEyebrow: 'Proyecto Destacado · PaaS',
+    objetivoTitulo: '¿Por qué construir un PaaS propio?',
+    objetivo:
+      'Construir un PaaS self-hosted (tipo Vercel/Netlify) que permita desplegar aplicaciones a partir de repositorios de GitHub con control total sobre la infraestructura, sin depender de servicios de terceros de pago, y entendiendo a fondo cada decisión arquitectónica.',
+    objetivoIntro:
+      'El objetivo fue construir una alternativa propia a Vercel/Netlify/Railway que automatizara el ciclo "push a GitHub → build → deploy público" para mis proyectos, asumiendo yo toda la responsabilidad operacional: build runners, registry, edge proxy, certificados, base de datos, observabilidad y billing. La motivación principal fue aprender haciendo, no solo desplegar.',
+    arquitecturaIntro:
+      'Monorepo de 9 microservicios NestJS (gateway, auth, users, projects, deployments, github, payments, email, encrypt) comunicados por RabbitMQ con patrón híbrido request/response + eventos asíncronos. Redis para sesiones, rate-limiting y Pub/Sub. PostgreSQL con Prisma como ORM compartido. Traefik como edge proxy con terminación TLS. El núcleo del sistema (deployments) clona repos, ejecuta build con Nixpacks/Railpack, publica en un registry Docker privado y despliega en Docker Swarm.',
+    arquitectura: {
+      items: [
+        { label: 'Tipo', value: 'Monorepo de microservicios NestJS auto-contenidos' },
+        { label: 'Servicios', value: '9 microservicios especializados' },
+        { label: 'API Gateway', value: 'Único endpoint HTTP público (gateway)' },
+        { label: 'Mensajería', value: 'RabbitMQ con request/response + eventos asíncronos' },
+        { label: 'Cache/Sesiones', value: 'Redis (rate-limit, sesiones JWT, Pub-Sub)' },
+        { label: 'Persistencia', value: 'PostgreSQL 15 + Prisma 6 (5 esquemas por dominio)' },
+        { label: 'Edge proxy', value: 'Traefik con terminación TLS automática' },
+        { label: 'Build runners', value: 'Nixpacks (dinámicos) y Railpack (estáticos)' },
+        { label: 'Orquestación', value: 'Docker Swarm con stack deploy' },
+        { label: 'Registry', value: 'Docker Registry privado interno' },
+        { label: 'Pagos', value: 'Stripe SDK + webhooks' },
+        { label: 'Email', value: 'Resend para emails transaccionales' },
+      ],
+    },
+    diagramas: {
+      topologiaLabel: 'Diagrama de Arquitectura',
+      serviciosLabel: 'Flujo de Despliegue',
+    },
+    aprendizaje: {
+      intro:
+        'Construir un PaaS real me obligó a entender patrones de sistemas distribuidos, seguridad operativa y trade-offs de diseño. Estos son los aprendizajes más valiosos:',
+      puntos: [
+        {
+          title: 'Microservicios con comunicación híbrida (RPC + eventos)',
+          description:
+            'Diseñar un bus de mensajes único (RabbitMQ) con dos patrones: request/response para llamadas síncronas tipo "auth login with github" y eventos asíncronos fire-and-forget para "github sync repositories". Cada servicio usa la conexión AMQP con reconexión automática. Aprendí a definir bien los boundaries: qué necesita respuesta inmediata y qué puede procesarse en background.',
+        },
+        {
+          title: 'Aislamiento de red por superficie de ataque',
+          description:
+            'Decisión clave: solo el gateway, el servicio de GitHub (para webhooks) y el servicio de pagos (para webhook de Stripe) están expuestos a internet. Los demás microservicios viven en una red interna sin acceso directo desde fuera. Las apps de los usuarios desplegadas corren en una tercera red separada. Esto reduce drásticamente la superficie de ataque: un compromiso en deployments-ms no expone automáticamente al resto.',
+        },
+        {
+          title: 'Endurecimiento de contenedores de usuario',
+          description:
+            'Cada app que un usuario despliega se ejecuta en un contenedor con filesystem read-only, usuario no-root (UID 1000), tmpfs endurecidos en rutas sensibles (/tmp, /run, /var/cache/nginx, etc.) y resource limits (CPU/memoria) leídos dinámicamente del plan del tenant. El goal: que un app comprometida no pueda escribir en el sistema, no escale de privileges, y no consuma recursos del host. Diferente por plan (FREE/PRO/INSANO).',
+        },
+        {
+          title: 'Integración de pagos y CI/CD con webhooks externos',
+          description:
+            'Stripe mediante SDK oficial y webhooks firmados para actualizar el planStatus del tenant. GitHub App + OAuth para clonar repos sin pedir PAT personal al usuario, con webhooks para reaccionar a pushes. Aprendí a manejar idempotencia en webhooks (un mismo evento puede llegar dos veces) y a validar firmas criptográficamente antes de cualquier mutación de estado.',
+        },
+        {
+          title: 'Cifrado de tokens sensibles con servicio dedicado',
+          description:
+            'Los access tokens de GitHub y los secrets de variables de entorno nunca se guardan en texto plano: pasan por un microservicio dedicado de cifrado (AES-256-GCM autenticado) que rota claves automáticamente y mantiene las últimas 3 versiones activas para poder descifrar tokens emitidos con claves anteriores. Los JWTs de sesión además van firmados Y cifrados antes de entregarse como cookie HttpOnly. Doble capa de protección.',
+        },
+      ],
+    },
+    hallazgo: {
+      titulo: 'El trade-off honesto: 9 microservicios, 5 esquemas Prisma',
+      resumen:
+        'La decisión que más me hizo pensar fue separar el sistema en 9 microservicios cuando un monolito bien organizado probablemente habría cubierto el 80% de los casos. Y, sobre todo, aceptar que cinco de esos servicios comparten una única Postgres con esquemas Prisma duplicados.',
+      implicaciones: [
+        'Microservicios dan boundaries claros y fallos aislados, pero cuestan: 9 pipelines de deploy, 9 imágenes Docker, tracing distribuido e idempotencia en cada handler. Para un sistema de este tamaño no es óbvio que sea la mejor elección — es la que más te enseña sobre sistemas distribuidos, que era parte del objetivo.',
+        'Duplicar el `schema.prisma` en 5 servicios te da autonomía de despliegue pero rompe la consistencia del modelo de datos. Cualquier cambio hay que replicarlo en 5 archivos coordinados. Funciona, pero tiene un techo de escala claro: si el sistema creciera a 15+ servicios, este diseño se rompería.',
+      ],
+      recomendaciones: [],
+    },
+    stack: [
+      'NestJS 11',
+      'TypeScript 5.7',
+      'RabbitMQ (NestJS Microservices)',
+      'Redis',
+      'PostgreSQL 15',
+      'Prisma 6',
+      'Docker Swarm',
+      'Traefik',
+      "Let's Encrypt",
+      'Nixpacks / Railpack',
+      'Stripe API',
+      'GitHub Apps + OAuth',
+      'AES-256-GCM (cifrado autenticado)',
+    ],
   },
 };
