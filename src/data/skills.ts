@@ -1,7 +1,7 @@
 export interface Skill {
   id: string;
   title: string;
-  icon: 'code' | 'panels' | 'database' | 'cpu' | 'key';
+  icon: 'code' | 'panels' | 'database' | 'cpu' | 'key' | 'shield';
   tags: string[];
 }
 
@@ -16,25 +16,61 @@ export const skills: Skill[] = [
     id: 'frontend',
     title: 'Desarrollo Frontend',
     icon: 'panels',
-    tags: ['React', 'Tailwind CSS', 'Bootstrap', 'Blade php'],
+    tags: ['React', 'Tailwind CSS', 'Bootstrap', 'Shadcn', 'Next.js'],
   },
   {
     id: 'backend',
     title: 'Desarrollo Backend',
     icon: 'code',
-    tags: ['Node.js', 'Express.js', 'NestJs', 'Microservicios NestJs', 'REST APIs', 'Laravel'],
+    tags: [
+      'Node.js',
+      'Express.js',
+      'NestJS',
+      'Microservicios NestJS',
+      'REST APIs',
+      'RabbitMQ',
+      'Redis',
+      'TypeORM',
+      'pdfmake',
+      'Laravel',
+    ],
   },
   {
     id: 'bases-datos',
     title: 'Bases de Datos',
     icon: 'database',
-    tags: ['MySQL', 'PostgreSQL', 'Prisma ORM', 'Type ORM', 'MongoDB'],
+    tags: ['MySQL', 'PostgreSQL', 'Prisma ORM', 'MongoDB'],
+  },
+  {
+    id: 'networking',
+    title: 'Networking & Seguridad',
+    icon: 'shield',
+    tags: [
+      'Proxmox VE',
+      'OPNsense',
+      'VLAN 802.1Q',
+      'Apache Guacamole',
+      'Dnsmasq',
+      'AES-256-GCM',
+    ],
   },
   {
     id: 'herramientas',
     title: 'Herramientas y Tecnologias',
     icon: 'cpu',
-    tags: ['Git', 'VS Code', 'Docker', 'Postman', 'Swagger', 'Figma'],
+    tags: [
+      'Git',
+      'VS Code',
+      'Docker',
+      'Docker Swarm',
+      'k3s',
+      'Traefik',
+      'Postman',
+      'Swagger',
+      'Stripe API',
+      'GitHub Apps / OAuth',
+      'Figma',
+    ],
   },
   {
     id: 'soft-skills',

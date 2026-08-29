@@ -53,6 +53,8 @@ export const projects: Project[] = [
     tags: ['NextJs', 'NestJs', 'MySQL', 'PdfMake', 'TypeScript', 'Shadcn', 'Tailwind CSS'],
     repoUrl: 'https://github.com/itsFDavid/Projects/tree/main/API-Nest-Tienda/tienda-don-pepe',
     repoLabel: 'GitHub API',
+    detailUrl: '/projects/tiendas-don-pepe',
+    detailLabel: 'Ver Detalle',
     demoUrl: 'https://tiendas-pepe.itsfdavid.com/login',
     demoLabel: 'Ver Sitio',
   },

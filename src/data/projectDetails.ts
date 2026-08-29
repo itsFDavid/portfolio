@@ -5,6 +5,11 @@ export interface ProjectDetailContent {
   objetivo: string;
   objetivoIntro: string;
   arquitecturaIntro: string;
+  cuentaDemo?: {
+    email: string;
+    password: string;
+    nota?: string;
+  };
   arquitectura: {
     items: { label: string; value: string }[];
   };
@@ -194,6 +199,105 @@ export const projectDetails: Record<string, ProjectDetailContent> = {
       'Stripe API',
       'GitHub Apps + OAuth',
       'AES-256-GCM (cifrado autenticado)',
+    ],
+  },
+  'tiendas-don-pepe': {
+    slug: 'tiendas-don-pepe',
+    headerEyebrow: 'Proyecto · E-commerce',
+    objetivoTitulo: '¿Por qué construir un e-commerce desde cero?',
+    objetivo:
+      'Construir un sistema de gestión de tienda minorista end-to-end: clientes, inventario, ventas con control de stock transaccional, y generación de facturas en PDF — para practicar un backend real con lógica de negocio no trivial (transacciones, roles, generación de documentos).',
+    objetivoIntro:
+      'La motivación fue práctica: un e-commerce real toca todo lo que un backend debe saber hacer bien — transacciones SQL con rollback, autorización por roles, generación de documentos, subida de archivos, paginación, validación de datos en cada capa. Quería un proyecto donde la lógica de negocio no fuera trivial y donde cada decisión de diseño tuviera consecuencias reales.',
+    arquitecturaIntro:
+      'Monolito modular en NestJS (un único proceso, 8 módulos de dominio) con TypeORM sobre MySQL, autenticación JWT con dos roles, y generación de PDFs con pdfmake usando templates declarativos. Frontend en Next.js con Shadcn + Tailwind consumiendo la API REST documentada con Swagger.',
+    cuentaDemo: {
+      email: 'pruebas@pruebas.com',
+      password: 'pruebas123',
+      nota:
+        'Cuenta de demostración con datos de seed cargados. Accede al Swagger en / para explorar los endpoints.',
+    },
+    arquitectura: {
+      items: [
+        { label: 'Tipo', value: 'Monolito modular NestJS (un único proceso)' },
+        { label: 'Módulos', value: '8 módulos de dominio (Auth, Clientes, Tiendas, Productos, Compras, Facturas, Printer, Common)' },
+        { label: 'Patrón', value: 'Modular monolith de NestJS (no microservicios)' },
+        { label: 'API', value: 'REST con prefijo global /api/v1/* y Swagger en /' },
+        { label: 'ORM', value: 'TypeORM 0.3 con autoLoadEntities' },
+        { label: 'DB', value: 'MySQL 8.0' },
+        { label: 'Auth', value: 'JWT propio (sin Passport) con sliding session' },
+        { label: 'Autorización', value: 'Roles planos (admin/user) con Reflector + SetMetadata' },
+        { label: 'PDFs', value: 'pdfmake con TDocumentDefinitions declarativo + fuentes Roboto locales' },
+        { label: 'Uploads', value: 'multer (diskStorage) en ./imagenes/ + ServeStatic' },
+        { label: 'Frontend', value: 'Next.js + Shadcn + Tailwind CSS' },
+        { label: 'Validación', value: 'class-validator + ValidationPipe global' },
+      ],
+    },
+    diagramas: {
+      topologiaLabel: 'Diagrama de Arquitectura',
+      serviciosLabel: 'Flujo de Venta y Facturación',
+    },
+    aprendizaje: {
+      intro:
+        'Un e-commerce "completo" termina tocando casi todos los temas importantes de un backend moderno. Estos son los aprendizajes que más me marcaron:',
+      puntos: [
+        {
+          title: 'Transacciones SQL explícitas con TypeORM QueryRunner',
+          description:
+            'La operación crítica es "vender N unidades de M productos a un cliente". El bug clásico es validar stock en línea y descontarlo después — si entre validar y descontar falla algo, queda stock vendido que no existe. La solución correcta: abrir un QueryRunner con startTransaction, validar TODO primero, y solo si todo pasa hacer los UPDATE. Si algo falla en el camino, rollback automático. La query de reversión tiene un N+1 que se podría optimizar, pero a esta escala no es problema.',
+        },
+        {
+          title: 'Cliente como espejo de User',
+          description:
+            'El sistema tiene dos entidades: User (autenticación) y Cliente (dominio de negocio). La relación es por email — un User siempre tiene un Cliente asociado. Esto desacopla el modelo de dominio de la autenticación, lo que es elegante: las compras y facturas no saben nada de passwords ni JWT. El trade-off es que abre la puerta a inconsistencias: si falla el insert del Cliente espejo al registrar un User, tienes un User sin Cliente (o al revés). La solución pragmática es crear ambas en cascada dentro de la misma transacción.',
+        },
+        {
+          title: 'Generación de PDFs con pdfmake declarativo',
+          description:
+            'En vez de pdfkit imperativo o puppeteer HTML→PDF, pdfmake permite describir el template de factura como un árbol de objetos: { content: [header, table, footer], styles: {...} }. El template vive en un solo archivo parametrizable. La marca de agua "DOCUMENTO NO FISCAL" se renderiza con una función background por página. Es la decisión correcta para PDFs repetibles: cambiar el logo o el formato es tocar un solo archivo, no decenas de líneas imperativas.',
+        },
+        {
+          title: 'Sliding session JWT sin refresh token formal',
+          description:
+            'AuthGuard no solo verifica el token — también genera uno nuevo y lo asigna a request.token. El efecto: cada request válido te devuelve un token renovado, como una sesión deslizante. No hay refresh token explícito. El trade-off: si el frontend no actualiza el header Authorization con el nuevo token, eventualmente el viejo expira y el usuario tiene que re-loguear. Es una solución elegante para SPAs que cooperan, pero frágil si el cliente ignora el header de respuesta.',
+        },
+        {
+          title: 'Roles con metadata reflectiva de NestJS',
+          description:
+            'Patrón canónico: @RoleProtected(ValidRoles.ADMIN) es solo un decorador que llama SetMetadata("roles", ["admin"]). UserRoleGuard usa Reflector.get(META_ROLES, handler) para decidir. Cada controller combina @UseGuards(AuthGuard, UserRoleGuard) y @RoleProtected(...). El resultado es autorización granular por endpoint sin boilerplate. El trade-off: solo dos roles planos (admin/user), sin permisos granulares. Suficiente para una app de tienda, insuficiente para SaaS multi-tenant.',
+        },
+      ],
+    },
+    hallazgo: {
+      titulo: 'El patrón Cliente-espejo-de-User: útil pero con gotcha',
+      resumen:
+        'La decisión más interesante (y la que más me enseñó sobre consistencia eventual) fue desacoplar autenticación de dominio haciendo que cada User tenga un Cliente asociado por email. Es elegante y te da boundaries claros, pero abre una puerta a inconsistencias que solo descubres cuando algo falla en producción.',
+      implicaciones: [
+        'Ventaja: el módulo de autenticación no sabe nada de clientes, y el módulo de clientes no sabe nada de passwords. Si en el futuro cambias la auth (passkeys, OAuth, MFA), el dominio de negocio no se entera.',
+        'Trade-off: si el insert del Cliente espejo falla (red, constraint, lo que sea), tienes un User sin Cliente. La app no rompe inmediatamente, pero el primer intento de comprar va a fallar con un error confuso. La defensa es crear ambas en la misma transacción: si el Cliente falla, rollback del User.',
+        'Para mi caso (proyecto de práctica, deploy simple), el riesgo era aceptable. Para producción con miles de usuarios, consideraría un FK Users.id_cliente real o un modelo de identidad unificado.',
+      ],
+      recomendaciones: [
+        'Validar las variables de entorno con Joi en arranque para fallar rápido si falta algo crítico (la app no lo hacía y se descubría en runtime).',
+        'Mover el bootstrap del admin inicial a un script CLI independiente en vez de quemarlo en el código del servicio, para que las credenciales nunca estén en el repo.',
+        'Activar políticas de CORS estrictas leyendo los orígenes permitidos desde una variable de entorno, en vez de dejar CORS abierto a todos los orígenes.',
+        'Añadir rate-limiting por IP en el endpoint de login para defenderse de fuerza bruta, y considerar CSRF tokens si la API se va a usar desde navegadores de terceros.',
+        'Desactivar Swagger en producción o protegerlo con auth, ya que la documentación interna puede revelar vectores de ataque.',
+      ],
+    },
+    stack: [
+      'NestJS 11',
+      'TypeScript',
+      'TypeORM',
+      'MySQL 8.0',
+      'JWT (jsonwebtoken)',
+      'pdfmake',
+      'bcryptjs',
+      'multer',
+      'Next.js',
+      'Shadcn',
+      'Tailwind CSS',
+      'Swagger / OpenAPI',
     ],
   },
 };

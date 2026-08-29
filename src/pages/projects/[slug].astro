@@ -2,11 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DetailHeader from '../../components/ui/DetailHeader.astro';
 import DetailSection from '../../components/ui/DetailSection.astro';
+import DemoCredentials from '../../components/ui/DemoCredentials.astro';
 import Tag from '../../components/ui/Tag.astro';
 import DiagramaRed from '../../components/sections/projects/homelab/DiagramaRed.astro';
 import DiagramaServicios from '../../components/sections/projects/homelab/DiagramaServicios.astro';
 import DiagramaArquitectura from '../../components/sections/projects/isverceo/DiagramaArquitectura.astro';
 import DiagramaFlujo from '../../components/sections/projects/isverceo/DiagramaFlujo.astro';
+import DiagramaArquitecturaTienda from '../../components/sections/projects/tiendas-don-pepe/DiagramaArquitectura.astro';
+import DiagramaFlujoTienda from '../../components/sections/projects/tiendas-don-pepe/DiagramaFlujo.astro';
 import { projects } from '../../data/projects';
 import { projectDetails } from '../../data/projectDetails';
 
@@ -21,6 +24,10 @@ const diagramasPorSlug: Record<
   isverceo: {
     primero: DiagramaArquitectura,
     segundo: DiagramaFlujo,
+  },
+  'tiendas-don-pepe': {
+    primero: DiagramaArquitecturaTienda,
+    segundo: DiagramaFlujoTienda,
   },
 };
 
@@ -52,7 +59,7 @@ const Diagramas = diagramasPorSlug[project.id];
   ogType="article"
 >
   <article class="min-h-screen pt-24 md:pt-32 pb-20">
-    <div class="container mx-auto px-4 max-w-5xl">
+    <div class="container mx-auto px-4 max-w-5xl text-justify">
       <DetailHeader
         eyebrow={detail.headerEyebrow}
         title={project.title}
@@ -88,19 +95,34 @@ const Diagramas = diagramasPorSlug[project.id];
           </p>
 
           <dl
-            class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-10 p-4 bg-background/50 border border-slate-800 rounded-lg"
+            class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 mb-10 p-6 bg-background/50 border border-slate-800 rounded-lg"
           >
             {
-              detail.arquitectura.items.map((item) => (
-                <div class="flex flex-col gap-1">
-                  <dt class="text-xs font-mono text-slate-500 uppercase tracking-wider">
-                    {item.label}
-                  </dt>
-                  <dd class="text-sm text-slate-200 font-mono">
-                    {item.value}
-                  </dd>
-                </div>
-              ))
+              detail.arquitectura.items.map((item, index) => {
+                const totalItems = detail.arquitectura.items.length;
+                const isLeftCol = index % 2 === 0;
+                const isLastRow = index >= totalItems - 2;
+                // Divisor vertical en items de la primera columna,
+                // excepto los de la última fila (evita borde contra el padding del grid)
+                const showDivider = isLeftCol && !isLastRow;
+                return (
+                  <div
+                    class:list={[
+                      'flex flex-col gap-1.5 p-4',
+                      showDivider
+                        ? 'md:border-r md:border-slate-700 md:pr-8'
+                        : '',
+                    ]}
+                  >
+                    <dt class="text-xs font-mono text-primary uppercase tracking-wider">
+                      {item.label}
+                    </dt>
+                    <dd class="text-sm text-slate-200 leading-relaxed break-words">
+                      {item.value}
+                    </dd>
+                  </div>
+                );
+              })
             }
           </dl>
 
@@ -232,7 +254,19 @@ const Diagramas = diagramasPorSlug[project.id];
         </DetailSection>
       </section>
 
-      <!-- 6. Enlace a manual completo -->
+      <!-- 6. Cuenta Demo (opcional) -->
+      {
+        detail.cuentaDemo && (
+          <DemoCredentials
+            email={detail.cuentaDemo.email}
+            password={detail.cuentaDemo.password}
+            nota={detail.cuentaDemo.nota}
+            demoUrl={project.demoUrl}
+          />
+        )
+      }
+
+      <!-- 7. Enlace a manual completo -->
       {
         detail.manualUrl && (
           <section class="mb-8">

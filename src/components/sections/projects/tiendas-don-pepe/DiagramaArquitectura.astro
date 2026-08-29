@@ -1,0 +1,195 @@
+---
+// Diagrama de Arquitectura - Tienda Don Pepe
+// Monolito modular NestJS, 8 módulos, MySQL, TypeORM, JWT, pdfmake
+// Adaptado del mermaid del análisis. Sin credenciales ni endpoints
+// específicos de ningún entorno.
+---
+
+<svg
+  viewBox="0 0 1200 1000"
+  role="img"
+  aria-labelledby="arch-title arch-desc"
+  class="w-full h-auto"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <title id="arch-title">Arquitectura de Tienda Don Pepe</title>
+  <desc id="arch-desc">
+    Monolito modular en NestJS con 8 módulos de dominio, MySQL con TypeORM,
+    autenticación JWT y generación de PDFs con pdfmake. Frontend en Next.js.
+  </desc>
+
+  <defs>
+    <marker id="arr-p" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="var(--color-primary)"></polygon>
+    </marker>
+    <marker id="arr-m" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#64748b"></polygon>
+    </marker>
+  </defs>
+
+  <!-- ====== Cliente ====== -->
+  <g>
+    <text x="60" y="40" fill="#94a3b8" font-size="10" font-family="monospace" letter-spacing="0.14em">CLIENT</text>
+
+    <rect x="60" y="60" width="260" height="70" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#475569" stroke-width="1"></rect>
+    <text x="190" y="86" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">FRONTEND · Next.js</text>
+    <text x="190" y="106" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Next.js + Shadcn</text>
+    <text x="190" y="122" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Consume REST /api/v1/*</text>
+  </g>
+
+  <!-- ====== App NestJS (single process) ====== -->
+  <g>
+    <text x="60" y="180" fill="#94a3b8" font-size="10" font-family="monospace" letter-spacing="0.14em">NESTJS APP · single process</text>
+
+    <rect x="60" y="200" width="1080" height="460" rx="10" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+
+    <!-- main.ts + app.module.ts header -->
+    <rect x="80" y="220" width="1040" height="50" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <rect x="88" y="228" width="80" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+    <text x="128" y="238" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">APP MODULE</text>
+    <text x="600" y="248" fill="white" font-size="13" font-family="monospace" text-anchor="middle" font-weight="700">main.ts · Swagger en / · setGlobalPrefix('api/v1')</text>
+
+    <!-- Modules grid: 8 modulos -->
+    <text x="80" y="298" fill="#94a3b8" font-size="9" font-family="monospace" letter-spacing="0.1em">DOMAIN MODULES (NestJS)</text>
+
+    <!-- Row 1: Auth, Clientes, Tiendas, Productos -->
+    <g>
+      <rect x="80" y="310" width="240" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+      <rect x="88" y="318" width="76" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+      <text x="126" y="328" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">AuthModule</text>
+      <text x="200" y="356" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Auth</text>
+      <text x="200" y="376" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">JWT + bcryptjs</text>
+      <text x="200" y="392" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Sliding session</text>
+    </g>
+
+    <g>
+      <rect x="340" y="310" width="240" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+      <rect x="348" y="318" width="92" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+      <text x="394" y="328" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">ClientesModule</text>
+      <text x="460" y="356" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Clientes</text>
+      <text x="460" y="376" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">CRUD + seed JSON</text>
+      <text x="460" y="392" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Espejo del User</text>
+    </g>
+
+    <g>
+      <rect x="600" y="310" width="240" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+      <rect x="608" y="318" width="80" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+      <text x="648" y="328" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">TiendasModule</text>
+      <text x="720" y="356" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Tiendas</text>
+      <text x="720" y="376" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">CRUD sucursales</text>
+      <text x="720" y="392" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">+ seed</text>
+    </g>
+
+    <g>
+      <rect x="860" y="310" width="240" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+      <rect x="868" y="318" width="100" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+      <text x="918" y="328" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">ProductosModule</text>
+      <text x="980" y="356" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Productos</text>
+      <text x="980" y="376" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">CRUD + multer</text>
+      <text x="980" y="392" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">upload imágenes</text>
+    </g>
+
+    <!-- Row 2: Compras (núcleo), Facturas, Printer, Common -->
+    <g>
+      <rect x="80" y="430" width="320" height="120" rx="6" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+      <rect x="88" y="438" width="100" height="14" rx="2" fill="rgba(0, 255, 136, 0.15)" stroke="var(--color-primary)" stroke-width="0.8"></rect>
+      <text x="138" y="448" fill="var(--color-primary)" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">COMPRAS · CORE</text>
+      <text x="240" y="478" fill="white" font-size="16" font-family="monospace" text-anchor="middle" font-weight="700">Compras</text>
+      <text x="240" y="498" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Transacciones SQL con TypeORM QueryRunner</text>
+      <text x="240" y="514" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Validar stock → descontar → commit / rollback</text>
+      <text x="240" y="534" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Núcleo del dominio</text>
+    </g>
+
+    <g>
+      <rect x="420" y="430" width="220" height="120" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+      <rect x="428" y="438" width="84" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+      <text x="470" y="448" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">FacturasModule</text>
+      <text x="530" y="478" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Facturas</text>
+      <text x="530" y="498" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">PDF stream</text>
+      <text x="530" y="514" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Marca de agua</text>
+      <text x="530" y="534" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">via PrinterService</text>
+    </g>
+
+    <g>
+      <rect x="660" y="430" width="200" height="120" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+      <rect x="668" y="438" width="80" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+      <text x="708" y="448" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">PrinterModule</text>
+      <text x="760" y="478" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Printer</text>
+      <text x="760" y="498" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">pdfmake</text>
+      <text x="760" y="514" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">TDocumentDefinitions</text>
+      <text x="760" y="534" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Fuentes Roboto</text>
+    </g>
+
+    <g>
+      <rect x="880" y="430" width="220" height="120" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+      <rect x="888" y="438" width="100" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+      <text x="938" y="448" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">CommonModule</text>
+      <text x="990" y="478" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">Common</text>
+      <text x="990" y="498" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Paginación · envs</text>
+      <text x="990" y="514" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">JSON seeds</text>
+      <text x="990" y="534" fill="#64748b" font-size="9" font-family="monospace" text-anchor="middle">Shared DTOs</text>
+    </g>
+
+    <!-- Conexiones internas: Auth -> Clientes (forwardRef) y Facturas -> Compras + Printer -->
+    <line x1="320" y1="360" x2="340" y2="360" stroke="#475569" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-m)"></line>
+    <text x="330" y="354" fill="#94a3b8" font-size="8" font-family="monospace">forwardRef</text>
+    <line x1="530" y1="430" x2="400" y2="550" stroke="#475569" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-m)"></line>
+    <line x1="530" y1="510" x2="700" y2="510" stroke="#475569" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-m)"></line>
+  </g>
+
+  <!-- ====== Frontend -> App ====== -->
+  <line x1="190" y1="130" x2="190" y2="200" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#arr-p)"></line>
+  <text x="200" y="170" fill="var(--color-primary)" font-size="9" font-family="monospace">REST /api/v1/*</text>
+
+  <!-- ====== Persistencia ====== -->
+  <g>
+    <text x="60" y="710" fill="#94a3b8" font-size="10" font-family="monospace" letter-spacing="0.14em">PERSISTENCE & STORAGE</text>
+
+    <rect x="60" y="730" width="380" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <rect x="68" y="738" width="92" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+    <text x="114" y="748" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">MYSQL 8.0</text>
+    <text x="250" y="780" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">TypeORM DataSource</text>
+    <text x="250" y="800" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Users · Clientes · Tiendas · Productos</text>
+    <text x="250" y="816" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Compras · DetalleCompra</text>
+
+    <rect x="480" y="730" width="280" height="100" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+    <rect x="488" y="738" width="92" height="14" rx="2" fill="rgba(100, 116, 139, 0.15)" stroke="#64748b" stroke-width="0.8"></rect>
+    <text x="534" y="748" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">FILE STORAGE</text>
+    <text x="620" y="780" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">multer diskStorage</text>
+    <text x="620" y="800" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">uploads → /imagenes/*</text>
+    <text x="620" y="816" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">ServeStatic (sin auth)</text>
+
+    <rect x="800" y="730" width="340" height="100" rx="6" fill="rgba(0, 255, 136, 0.04)" stroke="var(--color-primary)" stroke-width="1.5"></rect>
+    <rect x="808" y="738" width="84" height="14" rx="2" fill="rgba(0, 255, 136, 0.15)" stroke="var(--color-primary)" stroke-width="0.8"></rect>
+    <text x="850" y="748" fill="var(--color-primary)" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="0.1em">PDF OUTPUT</text>
+    <text x="970" y="780" fill="white" font-size="14" font-family="monospace" text-anchor="middle" font-weight="700">application/pdf stream</text>
+    <text x="970" y="800" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">content-disposition: attachment</text>
+    <text x="970" y="816" fill="#94a3b8" font-size="10" font-family="monospace" text-anchor="middle">Watermark: NO FISCAL</text>
+  </g>
+
+  <!-- Conexiones app -> persistence -->
+  <line x1="200" y1="660" x2="250" y2="730" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#arr-p)"></line>
+  <text x="210" y="700" fill="var(--color-primary)" font-size="9" font-family="monospace">TypeORM</text>
+
+  <line x1="500" y1="660" x2="620" y2="730" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-m)"></line>
+  <text x="540" y="700" fill="#94a3b8" font-size="9" font-family="monospace">multer</text>
+
+  <line x1="800" y1="660" x2="970" y2="730" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#arr-p)"></line>
+  <text x="850" y="700" fill="var(--color-primary)" font-size="9" font-family="monospace">stream</text>
+
+  <!-- ====== Leyenda ====== -->
+  <line x1="100" y1="880" x2="1100" y2="880" stroke="#475569" stroke-width="0.8"></line>
+  <text x="100" y="900" fill="#94a3b8" font-size="9" font-family="monospace" letter-spacing="0.14em">LEGEND</text>
+
+  <rect x="200" y="890" width="16" height="12" rx="2" fill="rgba(0, 255, 136, 0.05)" stroke="var(--color-primary)" stroke-width="2"></rect>
+  <text x="224" y="900" fill="#94a3b8" font-size="9" font-family="monospace">Core / focal module</text>
+
+  <line x1="380" y1="896" x2="420" y2="896" stroke="var(--color-primary)" stroke-width="1.2" marker-end="url(#arr-p)"></line>
+  <text x="428" y="900" fill="#94a3b8" font-size="9" font-family="monospace">Data flow</text>
+
+  <line x1="540" y1="896" x2="580" y2="896" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-m)"></line>
+  <text x="588" y="900" fill="#94a3b8" font-size="9" font-family="monospace">Internal dependency</text>
+
+  <rect x="780" y="890" width="16" height="12" rx="2" fill="rgba(15, 23, 42, 0.6)" stroke="#475569" stroke-width="1"></rect>
+  <text x="804" y="900" fill="#94a3b8" font-size="9" font-family="monospace">Domain module</text>
+</svg>

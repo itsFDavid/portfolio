@@ -128,16 +128,16 @@ const { project } = Astro.props;
     </div>
 
     {(project.demoUrl || project.repoUrl || project.detailUrl) && (
-      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+      <div class="flex flex-col gap-2 pt-2">
         {project.detailUrl && project.detailLabel && (
           <a
             href={project.detailUrl}
             aria-label={`Ver detalle de ${project.title}`}
             class:list={[
-              'justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input h-9 rounded-md px-3 flex gap-2 items-center ease-in-out duration-300',
+              'w-full justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border h-9 rounded-md flex gap-2 items-center ease-in-out duration-300',
               project.featured
-                ? 'bg-primary text-black hover:bg-primary/90 w-full font-bold border-transparent px-4'
-                : 'bg-background hover:bg-accent hover:text-accent-foreground border-slate-800 hover:bg-primary/90 hover:text-black',
+                ? 'bg-primary text-black hover:bg-primary/90 font-bold border-transparent px-4'
+                : 'bg-background hover:bg-accent hover:text-accent-foreground border-slate-800 hover:bg-primary/90 hover:text-black px-3',
             ]}
           >
             <svg
@@ -168,10 +168,10 @@ const { project } = Astro.props;
             rel="noopener noreferrer"
             aria-label={`Visit ${project.title}`}
             class:list={[
-              'justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input h-9 rounded-md px-3 flex gap-2 items-center ease-in-out duration-300',
+              'w-full justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border h-9 rounded-md flex gap-2 items-center ease-in-out duration-300',
               project.featured
-                ? 'bg-primary text-black hover:bg-primary/90 w-full font-bold border-transparent px-4'
-                : 'bg-background hover:bg-accent hover:text-accent-foreground border-slate-800 hover:bg-primary/90 hover:text-black',
+                ? 'bg-primary text-black hover:bg-primary/90 font-bold border-transparent px-4'
+                : 'bg-background hover:bg-accent hover:text-accent-foreground border-slate-800 hover:bg-primary/90 hover:text-black px-3',
             ]}
           >
             {project.iframe ? (
@@ -218,7 +218,7 @@ const { project } = Astro.props;
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`GitHub repository for ${project.title}`}
-            class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
+            class="w-full justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex gap-2 items-center border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
