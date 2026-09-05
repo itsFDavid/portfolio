@@ -11,4 +11,11 @@ export default defineConfig({
     port: 4321,
     allowedHosts: [".itsfdavid.com"],
   },
+  i18n: {
+    defaultLocale: "es",
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

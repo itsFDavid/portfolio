@@ -1,6 +1,9 @@
+import type { Lang } from "../i18n/utils";
+import type { LocalizedText } from "../i18n/types";
+
 export interface Skill {
   id: string;
-  title: string;
+  title: LocalizedText;
   icon: 'code' | 'panels' | 'database' | 'cpu' | 'key' | 'shield';
   tags: string[];
 }
@@ -8,19 +11,19 @@ export interface Skill {
 export const skills: Skill[] = [
   {
     id: 'lenguajes',
-    title: 'Lenguajes de Programacion',
+    title: { es: 'Lenguajes de Programacion', en: 'Programming Languages' },
     icon: 'panels',
     tags: ['JavaScript', 'TypeScript', 'Python', 'HTML & CSS', 'SQL', 'PHP'],
   },
   {
     id: 'frontend',
-    title: 'Desarrollo Frontend',
+    title: { es: 'Desarrollo Frontend', en: 'Frontend Development' },
     icon: 'panels',
     tags: ['React', 'Tailwind CSS', 'Bootstrap', 'Shadcn', 'Next.js'],
   },
   {
     id: 'backend',
-    title: 'Desarrollo Backend',
+    title: { es: 'Desarrollo Backend', en: 'Backend Development' },
     icon: 'code',
     tags: [
       'Node.js',
@@ -37,13 +40,13 @@ export const skills: Skill[] = [
   },
   {
     id: 'bases-datos',
-    title: 'Bases de Datos',
+    title: { es: 'Bases de Datos', en: 'Databases' },
     icon: 'database',
     tags: ['MySQL', 'PostgreSQL', 'Prisma ORM', 'MongoDB'],
   },
   {
     id: 'networking',
-    title: 'Networking & Seguridad',
+    title: { es: 'Networking & Seguridad', en: 'Networking & Security' },
     icon: 'shield',
     tags: [
       'Proxmox VE',
@@ -56,7 +59,7 @@ export const skills: Skill[] = [
   },
   {
     id: 'herramientas',
-    title: 'Herramientas y Tecnologias',
+    title: { es: 'Herramientas y Tecnologias', en: 'Tools and Technologies' },
     icon: 'cpu',
     tags: [
       'Git',
@@ -74,7 +77,7 @@ export const skills: Skill[] = [
   },
   {
     id: 'soft-skills',
-    title: 'Soft Skills y Hard Skills',
+    title: { es: 'Soft Skills y Hard Skills', en: 'Soft Skills and Hard Skills' },
     icon: 'key',
     tags: [
       'Ingles B2',
@@ -87,3 +90,14 @@ export const skills: Skill[] = [
     ],
   },
 ];
+
+export function getSkills(lang: Lang) {
+  return skills.map((s) => ({
+    id: s.id,
+    title: s.title[lang],
+    icon: s.icon,
+    tags: s.tags,
+  }));
+}
+
+export type ResolvedSkill = ReturnType<typeof getSkills>[number];

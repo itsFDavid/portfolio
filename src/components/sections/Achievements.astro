@@ -1,13 +1,16 @@
 ---
-import type { Achievement } from '../../data/achievements';
+import type { Achievement, ResolvedAchievement } from '../../data/achievements';
 import SectionTitle from '../ui/SectionTitle.astro';
 import AchievementCard from '../cards/AchievementCard.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
 
 export interface Props {
-  achievements: Achievement[];
+  achievements: ResolvedAchievement[];
+  lang: Lang;
 }
 
-const { achievements } = Astro.props;
+const { achievements, lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -15,11 +18,10 @@ const { achievements } = Astro.props;
   class="min-h-screen flex items-center justify-start px-4 py-16"
 >
   <div class="w-full mx-auto">
-    <SectionTitle title="Logros y Reconocimientos" underlineWidth="w-29" />
+    <SectionTitle title={t('achievements.title')} underlineWidth="w-29" />
 
     <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
-      Algunas certificaciones, cursos y logros que he obtenido a lo largo de mi
-      carrera.
+      {t('achievements.description')}
     </p>
 
     <div class="flex flex-col sm:flex-row justify-between mb-6 space-y-2 sm:space-y-0 sm:space-x-2">
@@ -46,8 +48,8 @@ const { achievements } = Astro.props;
           <circle cx="19" cy="19" r="1"></circle>
           <circle cx="5" cy="19" r="1"></circle>
         </svg>
-        <span class="text-sm hidden md:inline">Desliza para ver mas</span>
-        <span class="text-sm md:hidden">Desliza</span>
+        <span class="text-sm hidden md:inline">{t('achievements.swipeHintLong')}</span>
+        <span class="text-sm md:hidden">{t('achievements.swipeHintShort')}</span>
       </div>
       <div class="flex space-x-2 justify-center sm:justify-end">
         <button

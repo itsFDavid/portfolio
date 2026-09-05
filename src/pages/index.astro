@@ -1,51 +1,75 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/sections/Hero.astro';
-import About from '../components/sections/About.astro';
-import Projects from '../components/sections/Projects.astro';
-import Skills from '../components/sections/Skills.astro';
-import Achievements from '../components/sections/Achievements.astro';
-import Contact from '../components/sections/Contact.astro';
-import { projects } from '../data/projects';
-import { achievements } from '../data/achievements';
-import { skills } from '../data/skills';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import About from "../components/sections/About.astro";
+import Projects from "../components/sections/Projects.astro";
+import Skills from "../components/sections/Skills.astro";
+import Achievements from "../components/sections/Achievements.astro";
+import Contact from "../components/sections/Contact.astro";
+import { getProjects } from "../data/projects";
+import { getAchievements } from "../data/achievements";
+import { getSkills } from "../data/skills";
+import { getLangFromUrl } from "../i18n/utils";
+import { useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Francisco David',
-  url: 'https://itsfdavid.com/',
-  image: 'https://itsfdavid.com/images/francisco_david.webp',
-  jobTitle: 'Desarrollador Full Stack',
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Francisco David",
+  url: "https://itsfdavid.com/",
+  image: "https://itsfdavid.com/images/francisco_david.webp",
+  jobTitle: "Desarrollador Full Stack",
   sameAs: [
-    'https://github.com/itsFdavid',
-    'https://www.linkedin.com/in/francisco-david-dev/',
+    "https://github.com/itsFdavid",
+    "https://www.linkedin.com/in/francisco-david-dev/",
   ],
   worksFor: {
-    '@type': 'Organization',
-    name: 'Freelancer',
+    "@type": "Organization",
+    name: "Freelancer",
   },
 };
 ---
 
 <BaseLayout
-  title="Francisco David | Desarrollador Full Stack y Portafolio Web"
-  description="Portafolio de Francisco David, desarrollador full stack especializado en nestjs, NextJS, proyectos web modernos y sistemas inteligentes."
-  ogTitle="Francisco David | Desarrollador Full Stack"
-  ogDescription="Explora los proyectos de Francisco David, un desarrollador full stack apasionado por soluciones modernas."
-  ogUrl="https://itsfdavid.com/"
-  twitterTitle="Francisco David | Desarrollador Web"
-  twitterDescription="Mira mis proyectos en desarrollo web con NestJS y NextJS."
+  title={t("seo.title")}
+  description={t("seo.description")}
+  ogTitle={t("seo.ogTitle")}
+  ogDescription={t("seo.ogDescription")}
+  twitterTitle={t("seo.twitterTitle")}
+  twitterDescription={t("seo.twitterDescription")}
   schemaJson={personSchema}
   enableHeaderScript={true}
   enableNotFoundScript={false}
+  lang={lang}
 >
   <ul class="list-none container mx-auto px-4">
-    <Hero />
-    <About />
-    <Projects projects={projects} />
-    <Skills skills={skills} />
-    <Achievements achievements={achievements} />
-    <Contact />
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Projects lang={lang} projects={getProjects(lang)} />
+    <Skills lang={lang} skills={getSkills(lang)} />
+    <Achievements lang={lang} achievements={getAchievements(lang)} />
+    <Contact lang={lang} />
   </ul>
+
+  <script is:inline>
+    (function () {
+      var KEY = "preferred-lang";
+      if (localStorage.getItem(KEY)) return;
+
+      var browserLang = (
+        navigator.language ||
+        navigator.languages?.[0] ||
+        "es"
+      ).toLowerCase();
+      if (browserLang.startsWith("en")) {
+        localStorage.setItem(KEY, "en");
+        window.location.replace("/en/");
+      } else {
+        localStorage.setItem(KEY, "es");
+      }
+    })();
+  </script>
 </BaseLayout>

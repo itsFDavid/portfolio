@@ -1,6 +1,14 @@
 ---
+import { useTranslations, type Lang } from '../../i18n/utils';
 import { socialLinks } from '../../data/social';
 import SocialIconHero from '../ui/SocialIconHero.astro';
+
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -15,7 +23,7 @@ import SocialIconHero from '../ui/SocialIconHero.astro';
   ></div>
 
   <div class="flex flex-col items-center lg:items-start space-y-4 w-full lg:w-1/2 order-2 lg:order-1">
-    <p class="text-sm text-primary">Hola! yo soy</p>
+    <p class="text-sm text-primary">{t('hero.greeting')}</p>
     <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 text-center lg:text-left">
       Francisco
       <span
@@ -25,7 +33,7 @@ import SocialIconHero from '../ui/SocialIconHero.astro';
     </h1>
 
     <p class="text-base md:text-lg lg:text-2xl mb-6 text-slate-500 text-center lg:text-justify">
-      Full Stack Developer · RPA Developer (UiPath) · Ing. en Sistemas
+      {t('hero.role')}
     </p>
 
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-5 justify-center items-center w-full">
@@ -35,14 +43,16 @@ import SocialIconHero from '../ui/SocialIconHero.astro';
             href="#contact"
             class="bg-primary font-bold text-base md:text-lg py-2 px-6 rounded-xl text-black hover:bg-primary/90 ease-in-out duration-300 w-full sm:w-auto text-center"
           >
-            Contactame
+            {t('hero.ctaContact')}
           </a>
         </div>
         <div class="hover:scale-105 flex items-center justify-center w-full sm:w-auto">
           <a
             href="#projects"
             class="bg-black font-bold text-base md:text-lg py-2 px-6 rounded-xl text-white border-1 border-slate-800 hover:bg-primary/90 hover:text-black ease-in-out duration-300 w-full sm:w-auto text-center sm:hover:bg-primary/90"
-            >Ver Proyectos</a
+            >
+            {t('hero.ctaProjects')}
+            </a
           >
         </div>
       </div>

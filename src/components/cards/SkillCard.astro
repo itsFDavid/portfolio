@@ -1,9 +1,9 @@
 ---
-import type { Skill } from '../../data/skills';
+import type { ResolvedSkill, Skill } from '../../data/skills';
 import Tag from '../ui/Tag.astro';
 
 export interface Props {
-  skill: Skill;
+  skill: ResolvedSkill;
 }
 
 const { skill } = Astro.props;

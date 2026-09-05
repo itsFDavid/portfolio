@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Proxmox - Homelab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            padding: 2rem; 
+            background: #f5f5f5; 
+            font-family: 'Geist', sans-serif;
+            color: #2d3142;
+        }
+        .header {
+            margin-bottom: 2rem;
+        }
+        .eyebrow {
+            font-family: 'Geist Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #4f5d75;
+            margin: 0 0 0.5rem 0;
+        }
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: #2d3142;
+            margin: 0;
+            line-height: 1.3;
+        }
+        .diagram-container {
+            background: #ffffff;
+            border: 1px solid rgba(45,49,66,0.12);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid rgba(45,49,66,0.12);
+            border-radius: 6px;
+            padding: 1.25rem;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .card-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+        .card-dot.coral { background: #eb6c36; }
+        .card-dot.muted { background: #4f5d75; }
+        .card-dot.link { background: #2e5aa8; }
+        .card h3 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3142;
+        }
+        .eyebrow-small {
+            font-family: 'Geist Mono', monospace;
+            font-size: 7px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #7a8399;
+            margin: 0 0 0.5rem 0;
+        }
+        .card ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .card li {
+            font-size: 12px;
+            color: #4f5d75;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid rgba(45,49,66,0.06);
+        }
+        .card li:last-child {
+            border-bottom: none;
+        }
+        .status-running { color: #059669; font-weight: 600; }
+        .status-stopped { color: #DC2626; }
+        .status-template { color: #7C3AED; }
+        .footer {
+            border-top: 1px solid rgba(45,49,66,0.10);
+            padding-top: 1rem;
+            color: #7a8399;
+            font-family: 'Geist Mono', monospace;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p class="eyebrow">VIRTUALIZACION</p>
+        <h1>Servicios Proxmox - Homelab</h1>
+    </div>
+
+    <div class="diagram-container">
+        <svg width="1400" height="1000" viewBox="0 0 1400 1000" role="img" aria-labelledby="services-title services-desc">
+            <title id="services-title">Servicios Proxmox del Homelab</title>
+            <desc id="services-desc">Diagrama nested mostrando el servidor Proxmox VE proxmox-host con 12 VMs QEMU/KVM y 1 contenedor LXC organizados por función</desc>
+            
+            <!-- Background -->
+            <rect width="100%" height="100%" fill="#f5f5f5"/>
+            
+            <!-- Dot pattern -->
+            <defs>
+                <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+                    <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots)" opacity="0.6"/>
+            
+            <!-- Proxmox Host Container (Outermost) -->
+            <rect x="40" y="60" width="1320" height="880" rx="12" fill="rgba(235,108,54,0.05)" stroke="#eb6c36" stroke-width="3" stroke-dasharray="12,8"/>
+            <rect x="52" y="72" width="120" height="16" rx="2" fill="rgba(235,108,54,0.15)" stroke="rgba(235,108,54,0.60)" stroke-width="1"/>
+            <text x="112" y="84" fill="rgba(235,108,54,0.9)" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">PROXMOX VE HOST</text>
+            
+            <!-- Host title -->
+            <text x="700" y="120" fill="#2d3142" font-size="20" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Servidor Proxmox VE - proxmox-host</text>
+            <text x="700" y="142" fill="#4f5d75" font-size="12" font-family="'Geist Mono', monospace" text-anchor="middle">192.0.2.10:8006 • Total: 12 VMs + 1 LXC + 1 Template</text>
+            
+            <!-- Running VMs Zone -->
+            <rect x="80" y="180" width="1240" height="600" rx="8" fill="rgba(5,150,105,0.03)" stroke="rgba(5,150,105,0.30)" stroke-width="2" stroke-dasharray="8,6"/>
+            <rect x="88" y="188" width="96" height="16" rx="2" fill="rgba(5,150,105,0.10)" stroke="rgba(5,150,105,0.50)" stroke-width="0.8"/>
+            <text x="136" y="200" fill="rgba(5,150,105,0.8)" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">RUNNING VMS</text>
+            
+            <!-- Row 1 - Core Services -->
+            
+            <!-- VM 100 - IsVerceo (FOCAL) -->
+            <rect x="120" y="240" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="120" y="240" width="200" height="120" rx="6" fill="rgba(235,108,54,0.10)" stroke="#eb6c36" stroke-width="2"/>
+            <rect x="128" y="248" width="40" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.50)" stroke-width="0.8"/>
+            <text x="148" y="257" fill="rgba(235,108,54,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 100</text>
+            <text x="220" y="280" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">IsVerceo</text>
+            <text x="220" y="300" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="220" y="318" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 3.3GB / 16GB</text>
+            <text x="220" y="332" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 4 cores</text>
+            <text x="220" y="346" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 213403s</text>
+            
+            <!-- VM 101 - vps-local -->
+            <rect x="360" y="240" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="360" y="240" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="368" y="248" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="388" y="257" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 101</text>
+            <text x="460" y="280" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">vps-local</text>
+            <text x="460" y="300" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="460" y="318" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 2.3GB / 8GB</text>
+            <text x="460" y="332" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 2 cores</text>
+            <text x="460" y="346" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 213357s</text>
+            
+            <!-- VM 102 - OPNsense (FOCAL) -->
+            <rect x="600" y="240" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="600" y="240" width="200" height="120" rx="6" fill="rgba(235,108,54,0.10)" stroke="#eb6c36" stroke-width="2"/>
+            <rect x="608" y="248" width="40" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.50)" stroke-width="0.8"/>
+            <text x="628" y="257" fill="rgba(235,108,54,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 102</text>
+            <text x="700" y="280" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">OPNsense</text>
+            <text x="700" y="300" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="700" y="318" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 1.8GB / 2GB</text>
+            <text x="700" y="332" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 2 cores</text>
+            <text x="700" y="346" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 213463s</text>
+            
+            <!-- VM 103 - mgmt-vm -->
+            <rect x="840" y="240" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="840" y="240" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="848" y="248" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="868" y="257" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 103</text>
+            <text x="940" y="280" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">mgmt-vm</text>
+            <text x="940" y="300" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="940" y="318" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 2.4GB / 4GB</text>
+            <text x="940" y="332" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 2 cores</text>
+            <text x="940" y="346" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 11937s</text>
+            
+            <!-- VM 104 - devops-vm -->
+            <rect x="1080" y="240" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="1080" y="240" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="1088" y="248" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="1108" y="257" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 104</text>
+            <text x="1180" y="280" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">devops-vm</text>
+            <text x="1180" y="300" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="1180" y="318" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 1.5GB / 8GB</text>
+            <text x="1180" y="332" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 4 cores</text>
+            <text x="1180" y="346" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 11935s</text>
+            
+            <!-- Row 2 -->
+            
+            <!-- VM 105 - aws-vm -->
+            <rect x="120" y="400" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="120" y="400" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="128" y="408" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="148" y="417" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 105</text>
+            <text x="220" y="440" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">aws-vm</text>
+            <text x="220" y="460" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="220" y="478" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 1.4GB / 8GB</text>
+            <text x="220" y="492" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 4 cores</text>
+            <text x="220" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 11933s</text>
+            
+            <!-- VM 106 - k3s-master -->
+            <rect x="360" y="400" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="360" y="400" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="368" y="408" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="388" y="417" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 106</text>
+            <text x="460" y="440" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">k3s-master</text>
+            <text x="460" y="460" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="460" y="478" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 2.1GB / 8GB</text>
+            <text x="460" y="492" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 4 cores</text>
+            <text x="460" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 11931s</text>
+            
+            <!-- VM 107 - k3s-worker-1 -->
+            <rect x="600" y="400" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="600" y="400" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="608" y="408" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="628" y="417" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 107</text>
+            <text x="700" y="440" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">k3s-worker-1</text>
+            <text x="700" y="460" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="700" y="478" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 1.1GB / 4GB</text>
+            <text x="700" y="492" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 2 cores</text>
+            <text x="700" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 11929s</text>
+            
+            <!-- VM 108 - k3s-worker-2 -->
+            <rect x="840" y="400" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="840" y="400" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="848" y="408" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="868" y="417" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 108</text>
+            <text x="940" y="440" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">k3s-worker-2</text>
+            <text x="940" y="460" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="940" y="478" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 1.1GB / 4GB</text>
+            <text x="940" y="492" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 2 cores</text>
+            <text x="940" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 11928s</text>
+            
+            <!-- VM 109 - observability-vm -->
+            <rect x="1080" y="400" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="1080" y="400" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="1088" y="408" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="1108" y="417" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 109</text>
+            <text x="1180" y="440" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">observability-vm</text>
+            <text x="1180" y="460" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="1180" y="478" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 2.3GB / 6GB</text>
+            <text x="1180" y="492" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 2 cores</text>
+            <text x="1180" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 213348s</text>
+            
+            <!-- Row 3 -->
+            
+            <!-- VM 200 - dev-workspace -->
+            <rect x="120" y="560" width="200" height="120" rx="6" fill="#f5f5f5"/>
+            <rect x="120" y="560" width="200" height="120" rx="6" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <rect x="128" y="568" width="40" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+            <text x="148" y="577" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 200</text>
+            <text x="220" y="600" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">dev-workspace</text>
+            <text x="220" y="620" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="220" y="638" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 1.6GB / 6GB</text>
+            <text x="220" y="652" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 4 cores</text>
+            <text x="220" y="666" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 213352s</text>
+            
+            <!-- LXC Zone -->
+            <rect x="360" y="560" width="200" height="120" rx="6" fill="rgba(46,90,168,0.05)" stroke="rgba(46,90,168,0.30)" stroke-width="2" stroke-dasharray="6,4"/>
+            <rect x="368" y="568" width="32" height="12" rx="2" fill="transparent" stroke="rgba(46,90,168,0.50)" stroke-width="0.8"/>
+            <text x="384" y="577" fill="rgba(46,90,168,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">LXC 111</text>
+            <text x="460" y="600" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">apache-guacamole</text>
+            <text x="460" y="620" fill="#059669" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">RUNNING</text>
+            <text x="460" y="638" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 472MB / 2GB</text>
+            <text x="460" y="652" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 1 core</text>
+            <text x="460" y="666" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Uptime: 213341s</text>
+            
+            <!-- Template Zone -->
+            <rect x="600" y="560" width="200" height="120" rx="6" fill="rgba(124,58,237,0.05)" stroke="rgba(124,58,237,0.30)" stroke-width="2" stroke-dasharray="6,4"/>
+            <rect x="608" y="568" width="56" height="12" rx="2" fill="transparent" stroke="rgba(124,58,237,0.50)" stroke-width="0.8"/>
+            <text x="636" y="577" fill="rgba(124,58,237,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VM 9000</text>
+            <text x="700" y="600" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">debian13-template</text>
+            <text x="700" y="620" fill="#7C3AED" font-size="10" font-family="'Geist Mono', monospace" text-anchor="middle" font-weight="600">TEMPLATE</text>
+            <text x="700" y="638" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">RAM: 0MB / 2GB</text>
+            <text x="700" y="652" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">CPU: 2 cores</text>
+            <text x="700" y="666" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Status: Stopped</text>
+            
+            <!-- Resource Summary -->
+            <rect x="840" y="560" width="440" height="120" rx="6" fill="rgba(79,93,117,0.02)" stroke="rgba(79,93,117,0.20)" stroke-width="1"/>
+            <rect x="848" y="568" width="88" height="12" rx="2" fill="transparent" stroke="rgba(79,93,117,0.40)" stroke-width="0.8"/>
+            <text x="892" y="577" fill="rgba(79,93,117,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">RESOURCE USAGE</text>
+            
+            <text x="1060" y="605" fill="#2d3142" font-size="16" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Total Resource Allocation</text>
+            
+            <text x="920" y="635" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace">Total RAM Used:</text>
+            <text x="1120" y="635" fill="#eb6c36" font-size="11" font-family="'Geist Mono', monospace" font-weight="600">19.2GB allocated</text>
+            
+            <text x="920" y="650" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace">Total CPU Cores:</text>
+            <text x="1120" y="650" fill="#eb6c36" font-size="11" font-family="'Geist Mono', monospace" font-weight="600">41 cores assigned</text>
+            
+            <text x="920" y="665" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace">Running Services:</text>
+            <text x="1120" y="665" fill="#059669" font-size="11" font-family="'Geist Mono', monospace" font-weight="600">12 VMs + 1 LXC</text>
+            
+            <!-- Legend -->
+            <line x1="120" y1="820" x2="1280" y2="820" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+            <text x="120" y="838" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+            
+            <!-- Legend items -->
+            <rect x="220" y="830" width="16" height="12" rx="2" fill="rgba(235,108,54,0.10)" stroke="#eb6c36" stroke-width="2"/>
+            <text x="244" y="839" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">Core Services</text>
+            
+            <rect x="360" y="830" width="16" height="12" rx="2" fill="white" stroke="#2d3142" stroke-width="1"/>
+            <text x="384" y="839" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">Standard VMs</text>
+            
+            <rect x="480" y="830" width="16" height="12" rx="2" fill="rgba(46,90,168,0.05)" stroke="rgba(46,90,168,0.30)" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="504" y="839" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">LXC Container</text>
+            
+            <rect x="600" y="830" width="16" height="12" rx="2" fill="rgba(124,58,237,0.05)" stroke="rgba(124,58,237,0.30)" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="624" y="839" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">VM Template</text>
+            
+            <circle cx="750" cy="836" r="4" fill="#059669"/>
+            <text x="762" y="839" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">Running Status</text>
+            
+            <circle cx="850" cy="836" r="4" fill="#7C3AED"/>
+            <text x="862" y="839" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">Template Status</text>
+            
+        </svg>
+    </div>
+
+    <div class="summary-grid">
+        <div class="card">
+            <p class="eyebrow-small">MAQUINAS VIRTUALES</p>
+            <div class="card-header">
+                <span class="card-dot coral"></span>
+                <h3>VMs Activas (12)</h3>
+            </div>
+            <ul>
+                <li><span class="status-running">VM 100</span> - IsVerceo (16GB/4c)</li>
+                <li><span class="status-running">VM 101</span> - vps-local (8GB/2c)</li>
+                <li><span class="status-running">VM 102</span> - OPNsense (2GB/2c)</li>
+                <li><span class="status-running">VM 103</span> - mgmt-vm (4GB/2c)</li>
+                <li><span class="status-running">VM 104</span> - devops-vm (8GB/4c)</li>
+                <li><span class="status-running">VM 105</span> - aws-vm (8GB/4c)</li>
+                <li><span class="status-running">VM 106-108</span> - k3s cluster (16GB/8c)</li>
+                <li><span class="status-running">VM 109</span> - observability-vm (6GB/2c)</li>
+                <li><span class="status-running">VM 200</span> - dev-workspace (6GB/4c)</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <p class="eyebrow-small">CONTENEDORES</p>
+            <div class="card-header">
+                <span class="card-dot muted"></span>
+                <h3>LXC + Templates</h3>
+            </div>
+            <ul>
+                <li><span class="status-running">LXC 111</span> - apache-guacamole</li>
+                <li><span class="status-template">VM 9000</span> - debian13-template</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <p class="eyebrow-small">RECURSOS</p>
+            <div class="card-header">
+                <span class="card-dot link"></span>
+                <h3>Uso Actual</h3>
+            </div>
+            <ul>
+                <li>RAM Asignada: 19.2GB total</li>
+                <li>CPU Cores: 41 asignados</li>
+                <li>Servicios Corriendo: 13</li>
+                <li>Host: proxmox-host (192.0.2.10)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Manual Tecnico de Infraestructura - Homelab Audit 2026</p>
+    </div>
+</body>
+</html>

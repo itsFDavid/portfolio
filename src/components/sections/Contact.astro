@@ -2,6 +2,14 @@
 import SectionTitle from '../ui/SectionTitle.astro';
 import { socialLinks } from '../../data/social';
 import SocialIcon from '../ui/SocialIcon.astro';
+import {useTranslations, type Lang } from '../../i18n/utils';
+
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -9,11 +17,10 @@ import SocialIcon from '../ui/SocialIcon.astro';
   class="min-h-screen flex items-center justify-start px-4 py-16"
 >
   <div class="w-full mx-auto">
-    <SectionTitle title="Contacto" />
+    <SectionTitle title={t('contact.title')} />
 
     <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
-      Si deseas ponerte en contacto conmigo, puedes enviarme un correo
-      electrónico o conectarte conmigo a través de las redes sociales.
+      {t('contact.description')}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -35,7 +42,7 @@ import SocialIcon from '../ui/SocialIcon.astro';
             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
           </svg>
           <div>
-            <h4 class="font-medium text-white">Email</h4>
+            <h4 class="font-medium text-white">{t('contact.emailLabel')}</h4>
             <p class="text-sm text-slate-400">
               <a href="mailto:fdavid04@icloud.com">fdavid04@icloud.com</a>
             </p>
@@ -61,15 +68,15 @@ import SocialIcon from '../ui/SocialIcon.astro';
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
           <div>
-            <h4 class="font-medium text-white">Ubicacion</h4>
-            <p class="text-sm text-slate-400">México, Edo. México</p>
+            <h4 class="font-medium text-white">{t('contact.locationLabel')}</h4>
+            <p class="text-sm text-slate-400">{t('contact.locationValue')}</p>
           </div>
         </div>
       </div>
 
       <div>
         <h3 class="text-base md:text-lg font-semibold mb-3 text-white">
-          Conecta conmigo
+          {t('contact.connectTitle')}
         </h3>
         <div class="flex space-x-4">
           {socialLinks.map((link) => <SocialIcon link={link} size="md" />)}

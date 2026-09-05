@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import About from '../../components/sections/About.astro';
+import Projects from '../../components/sections/Projects.astro';
+import Skills from '../../components/sections/Skills.astro';
+import Achievements from '../../components/sections/Achievements.astro';
+import Contact from '../../components/sections/Contact.astro';
+import { getProjects } from '../../data/projects';
+import { getAchievements } from '../../data/achievements';
+import { getSkills } from '../../data/skills';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Francisco David',
+  url: 'https://itsfdavid.com/en/',
+  image: 'https://itsfdavid.com/images/francisco_david.webp',
+  jobTitle: 'Full Stack Developer',
+  sameAs: [
+    'https://github.com/itsFdavid',
+    'https://www.linkedin.com/in/francisco-david-dev/',
+  ],
+  worksFor: { '@type': 'Organization', name: 'Freelancer' },
+};
+---
+
+<BaseLayout
+  title={t('seo.title')}
+  description={t('seo.description')}
+  ogTitle={t('seo.ogTitle')}
+  ogDescription={t('seo.ogDescription')}
+  twitterTitle={t('seo.twitterTitle')}
+  twitterDescription={t('seo.twitterDescription')}
+  schemaJson={personSchema}
+  enableHeaderScript={true}
+  enableNotFoundScript={false}
+  lang={lang}
+>
+  <ul class="list-none container mx-auto px-4">
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Projects lang={lang} projects={getProjects(lang)} />
+    <Skills lang={lang} skills={getSkills(lang)} />
+    <Achievements lang={lang} achievements={getAchievements(lang)} />
+    <Contact lang={lang} />
+  </ul>
+</BaseLayout>

@@ -1,5 +1,19 @@
 ---
-import { navigation } from '../../data/navigation';
+import type { ResolvedNavigation } from "../../data/navigation";
+import type { Lang } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+export interface Props {
+  navigation: ResolvedNavigation[];
+  lang: Lang;
+}
+
+const { navigation, lang } = Astro.props;
+const otherLang = lang === "es" ? "en" : "es";
+const switchUrl = getRelativeLocaleUrl(
+  otherLang,
+  Astro.url.pathname.replace(/^\/en/, "") || "/",
+);
 ---
 
 <header
@@ -11,7 +25,11 @@ import { navigation } from '../../data/navigation';
     >
       <div class="w-full md:w-auto flex justify-between items-center">
         <a href="/" class="text-primary text-xl md:text-2xl font-bold">FD.</a>
-        <button class="md:hidden text-white" id="mobile-menu-toggle" aria-label="Toggle menu">
+        <button
+          class="md:hidden text-white"
+          id="mobile-menu-toggle"
+          aria-label="Toggle menu"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -42,9 +60,19 @@ import { navigation } from '../../data/navigation';
             </li>
           ))
         }
+        <li>
+          <a
+            href={switchUrl}
+            class="lang-switch text-sm md:text-base font-bold bg-primary/10 text-primary border border-primary/30 px-3 py-1.5 rounded-md hover:bg-primary hover:text-black transition-all duration-300"
+          >
+            {lang === "es" ? "EN" : "ES"}
+          </a>
+        </li>
       </div>
       <div class="w-full md:hidden mt-4 hidden" id="mobile-menu">
-        <div class="flex flex-col space-y-3 text-left bg-background/90 rounded-lg p-4">
+        <div
+          class="flex flex-col space-y-3 text-left bg-background/90 rounded-lg p-4"
+        >
           {
             navigation.map((item) => (
               <a
@@ -55,8 +83,42 @@ import { navigation } from '../../data/navigation';
               </a>
             ))
           }
+          <li>
+            <a
+              href={switchUrl}
+              class="lang-switch text-sm md:text-base font-bold bg-primary/10 text-primary border border-primary/30 px-3 py-1.5 rounded-md hover:bg-primary hover:text-black transition-all duration-300"
+            >
+              {lang === "es" ? "EN" : "ES"}
+            </a>
+          </li>
         </div>
       </div>
     </ul>
   </nav>
 </header>
+
+<script>
+  function setupLangSwitchers() {
+    const switchers = document.querySelectorAll(".lang-switch");
+
+    switchers.forEach((link) => {
+      link.addEventListener("click", function (this: HTMLAnchorElement, e) {
+        // Obtenemos el hash actual de la ventana (ej. "#projects")
+        const currentHash = window.location.hash;
+
+        if (currentHash) {
+          e.preventDefault();
+          // Navegamos a la URL de cambio de idioma + el hash actual
+          const targetUrl = this.href;
+          window.location.href = targetUrl + currentHash;
+        }
+      });
+    });
+  }
+
+  // Ejecutar al cargar la página
+  setupLangSwitchers();
+
+  // Si usas View Transitions de Astro, esto asegura que el script vuelva a ejecutarse al cambiar de ruta
+  document.addEventListener("astro:page-load", setupLangSwitchers);
+</script>

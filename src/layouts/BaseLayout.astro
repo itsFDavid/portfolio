@@ -1,6 +1,8 @@
 ---
 import SEO from '../components/seo/SEO.astro';
 import Header from '../components/layout/Header.astro';
+import type { Lang } from '../i18n/utils';
+import { getNavigation } from '../data/navigation';
 
 export interface Props {
   title: string;
@@ -16,6 +18,7 @@ export interface Props {
   bodyClass?: string;
   enableHeaderScript?: boolean;
   enableNotFoundScript?: boolean;
+  lang?: Lang;
 }
 
 const {
@@ -32,11 +35,12 @@ const {
   bodyClass = 'bg-background text-white font-cascadia-code',
   enableHeaderScript = true,
   enableNotFoundScript = false,
+  lang = 'es',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <SEO
       title={title}
@@ -53,7 +57,7 @@ const {
     <link rel="stylesheet" href="/styles/output.css" />
   </head>
   <body class={bodyClass}>
-    {!enableNotFoundScript && <Header />}
+    {!enableNotFoundScript && <Header navigation={getNavigation(lang)} lang={lang} />}
     <slot />
 
     {enableHeaderScript && <script src="/js/header.js" defer></script>}

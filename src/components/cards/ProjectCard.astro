@@ -1,12 +1,15 @@
 ---
-import type { Project } from '../../data/projects';
+import type { Project, ResolvedProject } from '../../data/projects';
+import { useTranslations, type Lang } from '../../i18n/utils';
 import Tag from '../ui/Tag.astro';
 
 export interface Props {
-  project: Project;
+  project: ResolvedProject;
+  lang: Lang;
 }
 
-const { project } = Astro.props;
+const { project, lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <article
@@ -36,7 +39,7 @@ const { project } = Astro.props;
             aria-label={`Visit ${project.title}`}
             class="bg-black/80 text-white font-semibold py-2 px-6 rounded-full border border-primary/50 hover:bg-primary hover:text-black transition-colors transform hover:scale-105"
           >
-            Visitar {project.title.split(' ')[0]}
+            {t('projects.visitProject')} {project.title.split(' ')[0]}
           </a>
         )}
       </div>
@@ -62,7 +65,7 @@ const { project } = Astro.props;
             aria-label={`Visitar ${project.title}`}
             class="bg-black/80 text-white font-semibold py-2 px-6 rounded-full border border-primary/50 hover:bg-primary hover:text-black transition-colors transform hover:scale-105"
           >
-            Visitar {project.title.split(' ')[0]}
+            {t('projects.visitProject')} {project.title.split(' ')[0]}
           </a>
         </div>
       )}
@@ -116,7 +119,7 @@ const { project } = Astro.props;
           >
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
-          Destacado
+          {t('projects.featured')}
         </span>
       )}
     </div>
@@ -131,7 +134,7 @@ const { project } = Astro.props;
       <div class="flex flex-col gap-2 pt-2">
         {project.detailUrl && project.detailLabel && (
           <a
-            href={project.detailUrl}
+            href={lang === 'es' ? `${project.detailUrl}` : `/en${project.detailUrl}`}
             aria-label={`Ver detalle de ${project.title}`}
             class:list={[
               'w-full justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border h-9 rounded-md flex gap-2 items-center ease-in-out duration-300',

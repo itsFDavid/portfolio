@@ -1,13 +1,16 @@
 ---
-import type { Skill } from '../../data/skills';
+import type { ResolvedSkill, Skill } from '../../data/skills';
 import SectionTitle from '../ui/SectionTitle.astro';
 import SkillCard from '../cards/SkillCard.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
 
 export interface Props {
-  skills: Skill[];
+  skills: ResolvedSkill[];
+  lang: Lang;
 }
 
-const { skills } = Astro.props;
+const { skills, lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section
@@ -15,11 +18,10 @@ const { skills } = Astro.props;
   class="min-h-screen flex items-center justify-start px-4 py-16"
 >
   <div class="w-full mx-auto">
-    <SectionTitle title="Habilidades" />
+    <SectionTitle title={t('skills.title')} />
 
     <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
-      Aquí están algunas de las tecnologías y herramientas con las que trabajo
-      regularmente.
+      {t('skills.description')}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">

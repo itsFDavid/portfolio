@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let showingMore = false;
 
   toggleBtn.addEventListener("click", () => {
+    console.log("Toggle button clicked");
     showingMore = !showingMore;
 
     extraProjects.forEach((project) => {
@@ -71,8 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
       project.classList.toggle("opacity-100");
     });
 
-    toggleText.textContent = showingMore
-      ? "Mostrar menos"
-      : "Ver más proyectos";
+    const isEnglish = window.location.pathname.startsWith("/en");
+    console.log("isEnglish:", isEnglish);
+
+    const textMore = isEnglish ? "Show more projects" : "Ver más proyectos";
+    const textLess = isEnglish ? "Show fewer projects" : "Mostrar menos";
+
+    toggleText.textContent = showingMore ? textLess : textMore;
   });
 });

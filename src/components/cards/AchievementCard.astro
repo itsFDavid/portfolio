@@ -1,9 +1,9 @@
 ---
-import type { Achievement } from '../../data/achievements';
+import type { Achievement, ResolvedAchievement } from '../../data/achievements';
 import Tag from '../ui/Tag.astro';
 
 export interface Props {
-  achievement: Achievement;
+  achievement: ResolvedAchievement;
 }
 
 const { achievement } = Astro.props;

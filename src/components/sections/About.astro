@@ -1,16 +1,25 @@
 ---
+import { useTranslations } from '../../i18n/utils';
 import SectionTitle from '../ui/SectionTitle.astro';
 import Tag from '../ui/Tag.astro';
+import type { Lang } from '../../i18n/utils';
 
-const skills = ['React', 'NestJs', 'Node.js', 'Python'];
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
+
+
 
 <section
   id="about"
   class="min-h-screen flex items-center justify-start px-4 py-16"
 >
   <div class="w-full mx-auto">
-    <SectionTitle title="Acerca de mí" />
+    <SectionTitle title={t('about.title')} />
 
     <div class="flex flex-col lg:flex-row w-full justify-between items-start space-y-8 lg:space-y-0 lg:space-x-8">
       <div class="space-y-6 w-full lg:w-8/12">
@@ -37,9 +46,7 @@ const skills = ['React', 'NestJs', 'Node.js', 'Python'];
             Bio
           </h3>
           <p class="text-base md:text-lg text-slate-500 mb-6 text-justify">
-            Apasionado por el backend (NestJS, microservicios) y la
-            automatización con UiPath. Disfruto enfrentar problemas nuevos
-            y aprender en el camino. Estudiante de Ing. en Sistemas.
+            {t('about.bioTitle')}
           </p>
         </div>
 
@@ -67,25 +74,24 @@ const skills = ['React', 'NestJs', 'Node.js', 'Python'];
                   <path d="M22 10v6"></path>
                   <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
                 </svg>
-                Educación
+                {t('about.eduTitle')}
               </h3>
               <div class="space-y-4">
                 <div class="space-y-2">
-                  <p class="text-white text-sm md:text-md">Tecnico en Computación</p>
+                  <p class="text-white text-sm md:text-md">{t('about.edu1Title')}</p>
                   <p class="text-xs md:text-sm">
-                    CECyTEM (Colegio de Estudios Cientificos y Tecnologicos del
-                    Estado de México)
+                    {t('about.edu1School')}
                   </p>
-                  <p class="text-xs md:text-sm">2019 - 2022</p>
+                  <p class="text-xs md:text-sm">{t('about.edu1Date')}</p>
                 </div>
                 <div class="space-y-2">
                   <p class="text-white text-sm md:text-md">
-                    Ingeniería en Sistemas Computacionales
+                    {t('about.edu2Title')}
                   </p>
                   <p class="text-xs md:text-sm">
-                    TESJI (Tecnologico de Estudios Superiores de Jilotepec)
+                    {t('about.edu2School')}
                   </p>
-                  <p class="text-xs md:text-sm">2022 - Presente</p>
+                  <p class="text-xs md:text-sm">{t('about.edu2Date')}</p>
                 </div>
               </div>
             </div>
@@ -103,15 +109,15 @@ const skills = ['React', 'NestJs', 'Node.js', 'Python'];
         </div>
         <div class="text-center lg:text-left mb-5">
           <h3 class="text-xl md:text-2xl mb-1">Francisco David</h3>
-          <p class="text-slate-500 text-sm">Full Stack Developer</p>
+          <p class="text-slate-500 text-sm">{t('about.role')}</p>
           <p class="text-slate-500 text-sm">
-            Estudiante de Ingeniera en Sistemas
+            {t('about.roleStudent')}
           </p>
         </div>
         
         <div>
           <a
-            href="/cv/CV_Francisco_David.pdf"
+            href={t('about.downloadResumeUrl')}
             download="CV_Francisco_David.pdf"
             class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-black hover:bg-primary/90 h-10 px-4 py-2 gap-2 hover:scale-105 ease-in-out duration-1000 w-full lg:w-auto"
           >
@@ -131,7 +137,7 @@ const skills = ['React', 'NestJs', 'Node.js', 'Python'];
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" x2="12" y1="15" y2="3"></line>
             </svg>
-            Download Resume
+            {t('about.downloadResume')}
           </a>
         </div>
       </div>

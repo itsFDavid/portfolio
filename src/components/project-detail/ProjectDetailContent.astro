@@ -1,0 +1,205 @@
+---
+import DetailSection from '../ui/DetailSection.astro';
+import DemoCredentials from '../ui/DemoCredentials.astro';
+import Tag from '../ui/Tag.astro';
+import DiagramaRed from '../sections/projects/homelab/DiagramaRed.astro';
+import DiagramaServicios from '../sections/projects/homelab/DiagramaServicios.astro';
+import DiagramaArquitectura from '../sections/projects/isverceo/DiagramaArquitectura.astro';
+import DiagramaFlujo from '../sections/projects/isverceo/DiagramaFlujo.astro';
+import DiagramaArquitecturaTienda from '../sections/projects/tiendas-don-pepe/DiagramaArquitectura.astro';
+import DiagramaFlujoTienda from '../sections/projects/tiendas-don-pepe/DiagramaFlujo.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+import type { ResolvedProject } from '../../data/projects';
+import type { getProjectDetails } from '../../data/projectDetails';
+
+type ResolvedDetail = ReturnType<typeof getProjectDetails>[string];
+
+export interface Props {
+  project: ResolvedProject;
+  detail: ResolvedDetail;
+  lang: Lang;
+}
+
+const { project, detail, lang } = Astro.props;
+const t = useTranslations(lang);
+
+const diagramasPorSlug: Record<string, { primero: any; segundo: any }> = {
+  'homelab-infrastructure': { primero: DiagramaRed, segundo: DiagramaServicios },
+  isverceo: { primero: DiagramaArquitectura, segundo: DiagramaFlujo },
+  'tiendas-don-pepe': { primero: DiagramaArquitecturaTienda, segundo: DiagramaFlujoTienda },
+};
+
+const Diagramas = diagramasPorSlug[project.id];
+const backToProjectsHref = lang === 'es' ? '/#projects' : '/en/#projects';
+const contactHref = lang === 'es' ? '/#contact' : '/en/#contact';
+---
+
+<article class="min-h-screen pt-24 md:pt-32 pb-20">
+  <div class="container mx-auto px-4 max-w-5xl text-justify">
+    <slot name="header" />
+
+    <!-- 1. Objetivo -->
+    <section class="mb-16">
+      <DetailSection id="objetivo" eyebrow={t('projectDetail.objetivoEyebrow')} title={detail.objetivoTitulo}>
+        <p class="text-slate-400 leading-relaxed">{detail.objetivoIntro}</p>
+        <p class="text-slate-300 leading-relaxed mt-4 p-4 border-l-2 border-primary/50 bg-primary/5 rounded-r">
+          {detail.objetivo}
+        </p>
+      </DetailSection>
+    </section>
+
+    <!-- 2. Arquitectura -->
+    <section class="mb-16">
+      <DetailSection id="arquitectura" eyebrow={t('projectDetail.arquitecturaEyebrow')} title={t('projectDetail.arquitecturaTitle')}>
+        <p class="text-slate-400 leading-relaxed mb-6">{detail.arquitecturaIntro}</p>
+
+        <dl class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 mb-10 p-6 bg-background/50 border border-slate-800 rounded-lg">
+          {detail.arquitectura.items.map((item, index) => {
+            const totalItems = detail.arquitectura.items.length;
+            const isLeftCol = index % 2 === 0;
+            const isLastRow = index >= totalItems - 2;
+            const showDivider = isLeftCol && !isLastRow;
+            return (
+              <div class:list={['flex flex-col gap-1.5 p-4', showDivider ? 'md:border-r md:border-slate-700 md:pr-8' : '']}>
+                <dt class="text-xs font-mono text-primary uppercase tracking-wider">{item.label[lang]}</dt>
+                <dd class="text-sm text-slate-200 leading-relaxed break-words">{item.value[lang]}</dd>
+              </div>
+            );
+          })}
+        </dl>
+
+        {Diagramas && (
+          <>
+            <h3 class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3">{detail.diagramas.topologiaLabel[lang]}</h3>
+            <div class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 mb-10 overflow-x-auto">
+              <Diagramas.primero />
+            </div>
+            <h3 class="text-sm font-mono uppercase tracking-widest text-slate-500 mb-3">{detail.diagramas.serviciosLabel[lang]}</h3>
+            <div class="bg-background/50 border border-slate-800 rounded-lg p-4 md:p-6 overflow-x-auto">
+              <Diagramas.segundo />
+            </div>
+          </>
+        )}
+      </DetailSection>
+    </section>
+
+    <!-- 3. Aprendizaje -->
+    <section class="mb-16">
+      <DetailSection id="aprendizaje" eyebrow={t('projectDetail.aprendizajeEyebrow')} title={t('projectDetail.aprendizajeTitle')}>
+        <p class="text-slate-400 leading-relaxed mb-8">{detail.aprendizaje.intro}</p>
+        <div class="space-y-6">
+          {detail.aprendizaje.puntos.map((punto, index) => (
+            <article class="border border-slate-800 rounded-lg p-5 hover:border-primary/50 transition-colors bg-background/30">
+              <header class="flex items-start gap-3 mb-3">
+                <span class="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary font-mono font-bold text-sm">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 class="text-lg font-bold text-white leading-snug">{punto.title}</h3>
+              </header>
+              <p class="text-slate-400 leading-relaxed pl-11">{punto.description}</p>
+            </article>
+          ))}
+        </div>
+      </DetailSection>
+    </section>
+
+    <!-- 4. Hallazgo -->
+    <section class="mb-16">
+      <DetailSection id="hallazgo" eyebrow={t('projectDetail.hallazgoEyebrow')} title={detail.hallazgo.titulo} variant="warning">
+        <p class="text-orange-300/90 leading-relaxed mb-6 font-medium">{detail.hallazgo.resumen}</p>
+
+        {detail.hallazgo.implicaciones.length > 0 && (
+          <>
+            <h3 class="text-sm font-mono uppercase tracking-widest text-orange-400 mb-3">{t('projectDetail.implicacionesTitle')}</h3>
+            <ul class="space-y-2 mb-8">
+              {detail.hallazgo.implicaciones.map((item) => (
+                <li class="flex gap-3 text-slate-300 leading-relaxed">
+                  <span class="text-orange-400 mt-1 flex-shrink-0">▸</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {detail.hallazgo.recomendaciones.length > 0 && (
+          <>
+            <h3 class="text-sm font-mono uppercase tracking-widest text-primary mb-3">{t('projectDetail.recomendacionesTitle')}</h3>
+            <ul class="space-y-2 mb-8">
+              {detail.hallazgo.recomendaciones.map((item) => (
+                <li class="flex gap-3 text-slate-300 leading-relaxed">
+                  <span class="text-primary mt-1 flex-shrink-0">▸</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </DetailSection>
+    </section>
+
+    <!-- 5. Stack -->
+    <section class="mb-16">
+      <DetailSection id="stack" eyebrow={t('projectDetail.stackEyebrow')} title={t('projectDetail.stackTitle')}>
+        <div class="flex flex-wrap gap-2">
+          {detail.stack.map((item) => <Tag label={item} variant="primary" />)}
+        </div>
+      </DetailSection>
+    </section>
+
+    <!-- 6. Cuenta Demo -->
+    {detail.cuentaDemo && (
+      <DemoCredentials
+        email={detail.cuentaDemo.email}
+        password={detail.cuentaDemo.password}
+        nota={detail.cuentaDemo.nota ? detail.cuentaDemo.nota[lang] : undefined},
+        demoUrl={project.demoUrl}
+      />
+    )}
+
+    <!-- 7. Manual -->
+    {detail.manualUrl && (
+      <section class="mb-8">
+        <div class="border border-primary/30 rounded-lg p-8 bg-primary/5 flex flex-col items-center text-center gap-5">
+          <div>
+            <p class="text-xs font-mono tracking-widest uppercase text-primary mb-2">{t('projectDetail.docsLabel')}</p>
+            <h3 class="text-lg font-bold text-white mb-2">{t('projectDetail.docsQuestion')}</h3>
+            <p class="text-sm text-slate-400 max-w-md mx-auto">{t('projectDetail.docsDescription')}</p>
+          </div>
+          <a
+            href={detail.manualUrl}
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-black hover:bg-primary/90 h-11 px-6 py-2 font-bold border border-transparent hover:scale-105 transition-transform"
+            aria-label={t('projectDetail.docsQuestion')}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text">
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+              <path d="M10 9H8" />
+              <path d="M16 13H8" />
+              <path d="M16 17H8" />
+            </svg>
+            {detail.manualLabel ?? t('projectDetail.docsButtonFallback')}
+          </a>
+        </div>
+      </section>
+    )}
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 pt-6 flex justify-between items-center">
+      <a href={backToProjectsHref} class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-primary transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 19-7-7 7-7"></path>
+          <path d="M19 12H5"></path>
+        </svg>
+        {t('projectDetail.backToProjects')}
+      </a>
+      <a href={contactHref} class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-primary transition-colors">
+        {t('projectDetail.contact')}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
+    </footer>
+  </div>
+</article>

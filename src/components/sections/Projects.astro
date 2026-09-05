@@ -2,12 +2,16 @@
 import type { Project } from '../../data/projects';
 import SectionTitle from '../ui/SectionTitle.astro';
 import ProjectCard from '../cards/ProjectCard.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+import type { ResolvedProject } from '../../data/projects';
 
 export interface Props {
-  projects: Project[];
+  projects: ResolvedProject[];
+  lang: Lang;
 }
 
-const { projects } = Astro.props;
+const { projects, lang } = Astro.props;
+const t = useTranslations(lang);
 const visibleProjects = projects.filter((p) => !p.hidden);
 const hiddenProjects = projects.filter((p) => p.hidden);
 ---
@@ -17,17 +21,16 @@ const hiddenProjects = projects.filter((p) => p.hidden);
   class="min-h-screen flex items-center justify-start px-4 py-16"
 >
   <div class="w-full mx-auto">
-    <SectionTitle title="Proyectos" />
+    <SectionTitle title={t('projects.title')} />
 
     <p class="text-slate-500 w-full md:w-2/3 text-justify mb-8">
-      Aquí puedes encontrar algunos de mis proyectos más destacados. Cada uno
-      refleja mi pasión por el desarrollo y mi compromiso con la calidad.
+      {t('projects.description')}
     </p>
 
     <div
       class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full"
     >
-      {projects.map((project) => <ProjectCard project={project} />)}
+      {projects.map((project) => <ProjectCard project={project} lang={lang} />)}
     </div>
 
     {hiddenProjects.length > 0 && (
@@ -36,7 +39,9 @@ const hiddenProjects = projects.filter((p) => p.hidden);
           class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-slate-800 bg-background hover:bg-primary hover:text-black h-10 px-4 py-2 group cursor-pointer hover:scale-105 ease-in-out duration-300"
           id="toggle-projects-btn"
         >
-          <span id="toggle-projects-text">Ver más proyectos</span>
+          <span id="toggle-projects-text" data-show-more={t('projects.showMore')} data-show-less={t('projects.showLess')}>
+            {t('projects.showMore')}
+          </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -57,3 +62,5 @@ const hiddenProjects = projects.filter((p) => p.hidden);
     )}
   </div>
 </section>
+
+
