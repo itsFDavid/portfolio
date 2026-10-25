@@ -27,8 +27,8 @@ jobs:
       - name: Trigger Dokploy deploy
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
-            -X POST "${{ secrets.DOKPLOY_URL }}/api/application.deploy" \
-            -H 'accept: application/json' \
+            -X POST ${{ secrets.DOKPLOY_WEBHOOK}} \
             -H "Content-Type: application/json" \
-            -H "x-api-key: ${{ secrets.DOKPLOY_API_KEY }}" \
-            -d '{"applicationId": "${{ secrets.DOKPLOY_APP_ID }}"}'   
+            -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_CLIENT_ID }}" \
+            -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}" \
+            -H "x-api-key: ${{ secrets.DOKPLOY_API_KEY }}"
